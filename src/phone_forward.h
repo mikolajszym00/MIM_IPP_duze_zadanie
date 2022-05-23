@@ -15,19 +15,22 @@
 #include "phone_numbers.h"
 #include "adding_functions.h"
 #include "forward.h"
+#include "reverse_funtions.h"
 
 /**
  * Struktura przechowująca przekierowania numerów telefonów.
  */
-struct PhoneForward;
 typedef struct PhoneForward PhoneForward;
+struct PhoneForward {
+    Trie trieOfForwards;
+};
 
 /** @brief Tworzy nową strukturę.
  * Tworzy nową strukturę niezawierającą żadnych przekierowań.
  * @return Wskaźnik na utworzoną strukturę lub NULL, gdy nie udało się
  *         alokować pamięci.
  */
-PhoneForward * phfwdNew(void);
+PhoneForward* phfwdNew(void);
 
 /** @brief Usuwa strukturę.
  * Usuwa strukturę wskazywaną przez @p pf. Nic nie robi, jeśli wskaźnik ten ma

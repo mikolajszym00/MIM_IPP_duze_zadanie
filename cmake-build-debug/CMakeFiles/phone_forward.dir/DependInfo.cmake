@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "C:/programs/IPP_duze_zadanie/src/phone_forward.c" "C:/programs/IPP_duze_zadanie/cmake-build-debug/CMakeFiles/phone_forward.dir/src/phone_forward.c.obj"
   "C:/programs/IPP_duze_zadanie/src/phone_forward_example.c" "C:/programs/IPP_duze_zadanie/cmake-build-debug/CMakeFiles/phone_forward.dir/src/phone_forward_example.c.obj"
   "C:/programs/IPP_duze_zadanie/src/phone_numbers.c" "C:/programs/IPP_duze_zadanie/cmake-build-debug/CMakeFiles/phone_forward.dir/src/phone_numbers.c.obj"
+  "C:/programs/IPP_duze_zadanie/src/reverse_funtions.c" "C:/programs/IPP_duze_zadanie/cmake-build-debug/CMakeFiles/phone_forward.dir/src/reverse_funtions.c.obj"
   "C:/programs/IPP_duze_zadanie/src/trie.c" "C:/programs/IPP_duze_zadanie/cmake-build-debug/CMakeFiles/phone_forward.dir/src/trie.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")

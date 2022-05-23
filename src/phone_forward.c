@@ -1,9 +1,5 @@
 #include "phone_forward.h"
 
-struct PhoneForward {
-    Trie trieOfForwards;
-};
-
 PhoneForward* phfwdNew() {
     Trie tr = trieNew(NULL, NULL, 0, 'q');
     if (tr == NULL) { return NULL; }
@@ -77,10 +73,17 @@ void phfwdRemove(PhoneForward *pf, char const *num) {
 }
 
 PhoneNumbers* phfwdReverse(PhoneForward const *pf, char const *num) {
-    printf("%c", num[1]);
-    Trie* arrayOfNumbers = NULL;
+    if (pf == NULL || num == NULL) { return NULL; }
 
-    return phnumNew(pf->trieOfForwards, arrayOfNumbers);
+    Trie phoneTrie = preparePhoneTrie(num); // przygotowuje nowe drzewo
+    Trie* forwardedNumPrefs = findForwardedNumPrefInPF(pf, num); // zwraca tablice tych co przekierowują
+    addForwardsFromPFToPhoneTrie(pf, phoneTrie, forwardedNumPrefs); // przelatuje drzewo w pf, dodaje elementy do phone trie
+
+    Trie* arrayOfNumbersEnd = createArrNumbersLexSorted(phoneTrie); // tworzy leksykograficzną talbicę końców
+
+    // trzeba jeszcze get poprawić
+
+    return phnumNew(phoneTrie, arrayOfNumbersEnd);
 }
 
 void phfwdDelete(PhoneForward *pf){

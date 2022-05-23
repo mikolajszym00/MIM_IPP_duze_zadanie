@@ -172,6 +172,18 @@ CMakeFiles/phone_forward.dir/src/phone_forward_example.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/phone_forward.dir/src/phone_forward_example.c.s"
 	C:\PROGRA~1\CODEBL~1\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\programs\IPP_duze_zadanie\src\phone_forward_example.c -o CMakeFiles\phone_forward.dir\src\phone_forward_example.c.s
 
+CMakeFiles/phone_forward.dir/src/reverse_funtions.c.obj: CMakeFiles/phone_forward.dir/flags.make
+CMakeFiles/phone_forward.dir/src/reverse_funtions.c.obj: ../src/reverse_funtions.c
+	C:\PROGRA~1\CODEBL~1\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\phone_forward.dir\src\reverse_funtions.c.obj   -c C:\programs\IPP_duze_zadanie\src\reverse_funtions.c
+
+CMakeFiles/phone_forward.dir/src/reverse_funtions.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/phone_forward.dir/src/reverse_funtions.c.i"
+	C:\PROGRA~1\CODEBL~1\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\programs\IPP_duze_zadanie\src\reverse_funtions.c > CMakeFiles\phone_forward.dir\src\reverse_funtions.c.i
+
+CMakeFiles/phone_forward.dir/src/reverse_funtions.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/phone_forward.dir/src/reverse_funtions.c.s"
+	C:\PROGRA~1\CODEBL~1\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\programs\IPP_duze_zadanie\src\reverse_funtions.c -o CMakeFiles\phone_forward.dir\src\reverse_funtions.c.s
+
 # Object files for target phone_forward
 phone_forward_OBJECTS = \
 "CMakeFiles/phone_forward.dir/src/phone_forward.c.obj" \
@@ -181,7 +193,8 @@ phone_forward_OBJECTS = \
 "CMakeFiles/phone_forward.dir/src/phone_numbers.c.obj" \
 "CMakeFiles/phone_forward.dir/src/deleting_trie.c.obj" \
 "CMakeFiles/phone_forward.dir/src/functions.c.obj" \
-"CMakeFiles/phone_forward.dir/src/phone_forward_example.c.obj"
+"CMakeFiles/phone_forward.dir/src/phone_forward_example.c.obj" \
+"CMakeFiles/phone_forward.dir/src/reverse_funtions.c.obj"
 
 # External object files for target phone_forward
 phone_forward_EXTERNAL_OBJECTS =
@@ -194,6 +207,7 @@ phone_forward.exe: CMakeFiles/phone_forward.dir/src/phone_numbers.c.obj
 phone_forward.exe: CMakeFiles/phone_forward.dir/src/deleting_trie.c.obj
 phone_forward.exe: CMakeFiles/phone_forward.dir/src/functions.c.obj
 phone_forward.exe: CMakeFiles/phone_forward.dir/src/phone_forward_example.c.obj
+phone_forward.exe: CMakeFiles/phone_forward.dir/src/reverse_funtions.c.obj
 phone_forward.exe: CMakeFiles/phone_forward.dir/build.make
 phone_forward.exe: CMakeFiles/phone_forward.dir/linklibs.rsp
 phone_forward.exe: CMakeFiles/phone_forward.dir/objects1.rsp
