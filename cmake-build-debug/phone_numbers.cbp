@@ -113,10 +113,10 @@
 		<Unit filename="C:/programs/IPP_duze_zadanie/src/phone_numbers.h">
 			<Option target="phone_forward"/>
 		</Unit>
-		<Unit filename="C:/programs/IPP_duze_zadanie/src/reverse_funtions.c">
+		<Unit filename="C:/programs/IPP_duze_zadanie/src/reverse_functions.c">
 			<Option target="phone_forward"/>
 		</Unit>
-		<Unit filename="C:/programs/IPP_duze_zadanie/src/reverse_funtions.h">
+		<Unit filename="C:/programs/IPP_duze_zadanie/src/reverse_functions.h">
 			<Option target="phone_forward"/>
 		</Unit>
 		<Unit filename="C:/programs/IPP_duze_zadanie/src/trie.c">

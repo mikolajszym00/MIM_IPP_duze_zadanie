@@ -37,8 +37,7 @@ Trie goToNumberEndTrie(Trie tr, char const* num) {
     return tr;
 }
 
-void findForwardedNumPrefInTrie(Trie* forwardedNumPrefs, Trie tr, char const* num) {
-    size_t freeIndex = 0;
+void findForwardedNumPrefInTrie(Trie* forwardedNumPrefs, size_t* freeIndex, Trie tr, char const* num, size_t* forwardCounter) {
     int index;
 
     Trie* arr = tr->arrayOfTries;
@@ -50,10 +49,24 @@ void findForwardedNumPrefInTrie(Trie* forwardedNumPrefs, Trie tr, char const* nu
         tr = arr[index];
 
         if (tr->forwardCounter > 0) { // czy jesli przekierowanie jest na piewrszym to zadziała
-            forwardedNumPrefs[freeIndex] = tr;
-            ++freeIndex;
+            *forwardCounter += tr->forwardCounter;
+
+            forwardedNumPrefs[*freeIndex] = tr;
+            ++(*freeIndex);
         }
 
         arr = tr->arrayOfTries;
     }
+}
+
+void searchTrie(Trie tr, void (*searchFunc)(Trie, Trie*, size_t*), Trie* forwardedNumPrefs, size_t* nForwarded) { // tr to korzeń
+    searchFunc(tr, forwardedNumPrefs, nForwarded);
+    Trie* arr = tr->arrayOfTries;
+
+    for (int i=0; i<10; i++) {
+        if (arr[i] != NULL) {
+            searchTrie(arr[i], searchFunc, forwardedNumPrefs, nForwarded);
+        }
+    }
+
 }

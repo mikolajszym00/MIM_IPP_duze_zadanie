@@ -19,4 +19,6 @@
  */
 bool getInteger(int* num, char character);
 
+char* reverseNum(char const* num); //nowe!!!!!!!!!!
+
 #endif //PHONE_NUMBERS_FUNCTIONS_H

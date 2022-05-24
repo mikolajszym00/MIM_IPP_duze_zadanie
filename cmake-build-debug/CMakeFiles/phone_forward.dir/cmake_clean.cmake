@@ -6,7 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/phone_forward.dir/src/phone_forward.c.obj"
   "CMakeFiles/phone_forward.dir/src/phone_forward_example.c.obj"
   "CMakeFiles/phone_forward.dir/src/phone_numbers.c.obj"
-  "CMakeFiles/phone_forward.dir/src/reverse_funtions.c.obj"
+  "CMakeFiles/phone_forward.dir/src/reverse_functions.c.obj"
   "CMakeFiles/phone_forward.dir/src/trie.c.obj"
   "libphone_forward.dll.a"
   "phone_forward.exe"

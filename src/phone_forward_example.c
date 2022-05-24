@@ -56,6 +56,10 @@ int main() {
   phnumDelete(pnum);
 
   pnum = phfwdReverse(pf, "432");
+  printf("%s", phnumGet(pnum, 0));
+  printf("%s", phnumGet(pnum, 1));
+  printf("%s", phnumGet(pnum, 2));
+
   assert(strcmp(phnumGet(pnum, 0), "431") == 0);
   assert(strcmp(phnumGet(pnum, 1), "432") == 0);
   assert(phnumGet(pnum, 2) == NULL);

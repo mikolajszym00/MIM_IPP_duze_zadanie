@@ -35,7 +35,10 @@ set(SOURCE_FILES
         src/deleting_trie.h
         src/functions.c
         src/functions.h
-        src/phone_forward_example.c src/reverse_funtions.c src/reverse_funtions.h)
+        src/phone_forward_example.c
+        src/reverse_functions.c
+        src/reverse_functions.h
+        )
 
 # Wskazujemy plik wykonywalny.
 add_executable(phone_forward ${SOURCE_FILES})

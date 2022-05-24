@@ -66,6 +66,8 @@ void getNumberFromTrie(Trie tr, char* number, size_t i);
  */
 Trie goToNumberEndTrie(Trie tr, char const* num);
 
-void findForwardedNumPrefInTrie(Trie* forwardedNumPrefs, Trie tr, char const* num);
+void findForwardedNumPrefInTrie(Trie* forwardedNumPrefs, size_t* freeIndex, Trie tr, char const* num, size_t* forwardCounter);
+
+void searchTrie(Trie tr, void (*searchFunc)(Trie, Trie*, size_t*), Trie* forwardedNumPrefs, size_t* nForwarded);
 
 #endif //PHONE_NUMBERS_TRIE_H

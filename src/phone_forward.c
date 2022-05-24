@@ -23,7 +23,7 @@ bool phfwdAdd(PhoneForward *pf, char const *num1, char const *num2) {
 }
 
 PhoneNumbers* phfwdGet(PhoneForward const *pf, char const *num) {
-    if (num == NULL) { return phnumNew(NULL, NULL);}
+    if (num == NULL) { return phnumNew(0, NULL, NULL, 'f');}
     if (num == NULL || pf == NULL) { return NULL;}
 
     Trie trieOfNumbers = trieNew(NULL, NULL, 0, 'e');
@@ -38,14 +38,15 @@ PhoneNumbers* phfwdGet(PhoneForward const *pf, char const *num) {
 
     free(forwardedNumber);
 
-    PhoneNumbers* pn = phnumNew(trieOfNumbers, arrayOfNumbersEnd);
+    PhoneNumbers* pn = phnumNew(1, trieOfNumbers, arrayOfNumbersEnd, 'f');
     if (pn->arrayOfNumbers == NULL) { return NULL; }
 
     return pn;
 }
 
 char const *phnumGet(PhoneNumbers const *pnum, size_t idx) {
-    if (pnum == NULL || idx != 0) { return NULL; }
+    if (pnum == NULL || idx >= pnum->numberOfTries) { return NULL; }
+//    printf("%zd", pnum->numberOfTries);
 
     Trie* arr = pnum->arrayOfNumbersEnd;
     if (arr == NULL) { return NULL; }
@@ -53,13 +54,7 @@ char const *phnumGet(PhoneNumbers const *pnum, size_t idx) {
     Trie tr = arr[idx];
     if (tr == NULL) { return NULL; }
 
-    char* number = calloc(tr->depth+1, sizeof(char));
-
-    getNumberFromTrie(tr, number, (tr->depth) - 1);
-
-    addNumbersPtrToArray(pnum, number);
-
-    return number;
+    return getNumber(pnum, tr);
 }
 
 void phfwdRemove(PhoneForward *pf, char const *num) {
@@ -76,14 +71,21 @@ PhoneNumbers* phfwdReverse(PhoneForward const *pf, char const *num) {
     if (pf == NULL || num == NULL) { return NULL; }
 
     Trie phoneTrie = preparePhoneTrie(num); // przygotowuje nowe drzewo
-    Trie* forwardedNumPrefs = findForwardedNumPrefInPF(pf, num); // zwraca tablice tych co przekierowują
-    addForwardsFromPFToPhoneTrie(pf, phoneTrie, forwardedNumPrefs); // przelatuje drzewo w pf, dodaje elementy do phone trie
 
-    Trie* arrayOfNumbersEnd = createArrNumbersLexSorted(phoneTrie); // tworzy leksykograficzną talbicę końców
+    size_t nForwarded = 0;
+    size_t forwardCounter = 0;
+
+    Trie* forwardedNumPrefs = findForwardedNumPrefInPF(pf->trieOfForwards, num, &nForwarded, &forwardCounter); // zwraca tablice tych co przekierowują
+    addForwardsFromPFToPhoneTrie(pf->trieOfForwards, phoneTrie, forwardedNumPrefs, &nForwarded); // przelatuje drzewo w pf, dodaje elementy do phone trie
+
+    free(forwardedNumPrefs);
+
+    Trie* arrayOfNumbersEnd = createArrNumbersLexSorted(phoneTrie, forwardCounter); // tworzy leksykograficzną talbicę końców
 
     // trzeba jeszcze get poprawić
 
-    return phnumNew(phoneTrie, arrayOfNumbersEnd);
+    return phnumNew(forwardCounter, phoneTrie, arrayOfNumbersEnd, 'r');
+//    return phnumNew(NULL, NULL);
 }
 
 void phfwdDelete(PhoneForward *pf){

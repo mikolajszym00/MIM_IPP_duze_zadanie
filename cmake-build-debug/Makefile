@@ -334,32 +334,32 @@ src/phone_numbers.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\phone_forward.dir\build.make CMakeFiles/phone_forward.dir/src/phone_numbers.c.s
 .PHONY : src/phone_numbers.c.s
 
-src/reverse_funtions.obj: src/reverse_funtions.c.obj
+src/reverse_functions.obj: src/reverse_functions.c.obj
 
-.PHONY : src/reverse_funtions.obj
+.PHONY : src/reverse_functions.obj
 
 # target to build an object file
-src/reverse_funtions.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\phone_forward.dir\build.make CMakeFiles/phone_forward.dir/src/reverse_funtions.c.obj
-.PHONY : src/reverse_funtions.c.obj
+src/reverse_functions.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\phone_forward.dir\build.make CMakeFiles/phone_forward.dir/src/reverse_functions.c.obj
+.PHONY : src/reverse_functions.c.obj
 
-src/reverse_funtions.i: src/reverse_funtions.c.i
+src/reverse_functions.i: src/reverse_functions.c.i
 
-.PHONY : src/reverse_funtions.i
+.PHONY : src/reverse_functions.i
 
 # target to preprocess a source file
-src/reverse_funtions.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\phone_forward.dir\build.make CMakeFiles/phone_forward.dir/src/reverse_funtions.c.i
-.PHONY : src/reverse_funtions.c.i
+src/reverse_functions.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\phone_forward.dir\build.make CMakeFiles/phone_forward.dir/src/reverse_functions.c.i
+.PHONY : src/reverse_functions.c.i
 
-src/reverse_funtions.s: src/reverse_funtions.c.s
+src/reverse_functions.s: src/reverse_functions.c.s
 
-.PHONY : src/reverse_funtions.s
+.PHONY : src/reverse_functions.s
 
 # target to generate assembly for a file
-src/reverse_funtions.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\phone_forward.dir\build.make CMakeFiles/phone_forward.dir/src/reverse_funtions.c.s
-.PHONY : src/reverse_funtions.c.s
+src/reverse_functions.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\phone_forward.dir\build.make CMakeFiles/phone_forward.dir/src/reverse_functions.c.s
+.PHONY : src/reverse_functions.c.s
 
 src/trie.obj: src/trie.c.obj
 
@@ -418,9 +418,9 @@ help:
 	@echo ... src/phone_numbers.obj
 	@echo ... src/phone_numbers.i
 	@echo ... src/phone_numbers.s
-	@echo ... src/reverse_funtions.obj
-	@echo ... src/reverse_funtions.i
-	@echo ... src/reverse_funtions.s
+	@echo ... src/reverse_functions.obj
+	@echo ... src/reverse_functions.i
+	@echo ... src/reverse_functions.s
 	@echo ... src/trie.obj
 	@echo ... src/trie.i
 	@echo ... src/trie.s
