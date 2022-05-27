@@ -36,7 +36,7 @@ Trie findMaxForward(Trie* arr, size_t i, char const *numToFind, Trie maxPref, bo
  * @return Wskaźnik na węzeł zawierający koniec numeru będzącego najdłuższym przekierowaniem dla
  * numeru wejściowego. Zwraca NULL, gdy @p maxPref jest NULL.
  */
-Trie setForwardingEndAndSizes(Trie maxPref, size_t* maxPrefSize, size_t* forwardingSize);
+Trie setForwardingEndAndSizes(Trie maxPref, size_t* forwardingSize); // zmiannaaaaa
 
 /** @brief Przepisuje przekierowanie do @p forwardedNumber.
  * @param[in] forwardElement       – wskaźnik na węzeł drzwa zawierający ostatni element
@@ -63,7 +63,7 @@ void setRestOfNumber(char* forwardedNumber, char const *initialNum, size_t initi
  * @return wskaźnik na napis reprezentujący przekierowany numer lub NULL, gdy nie
  *         udało się alokować pamięci lub @p initialNum nie reprezentuje numeru.
  */
-char* getForwardedNumber(Trie tr, char const *initialNum, size_t initialNumSize);
+char* getForwardedNumber(Trie tr, char const *initialNum, size_t initialNumSize, size_t* numberSplitIndex);
 
 /** @brief Usuwa przekierowania ze struktury opisującej numery i ich przekierowania.
  * Usuwa wszystkie przekierowania znajdujące się w poddrzewach ścieżki do przekierowywań,

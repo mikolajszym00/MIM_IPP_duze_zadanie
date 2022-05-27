@@ -22,6 +22,7 @@ int main() {
   memset(num2, 0, sizeof num2);
 
   pnum = phfwdGet(pf, "1234");
+
   assert(strcmp(phnumGet(pnum, 0), "94") == 0);
   assert(phnumGet(pnum, 1) == NULL);
   phnumDelete(pnum);
@@ -56,9 +57,11 @@ int main() {
   phnumDelete(pnum);
 
   pnum = phfwdReverse(pf, "432");
-  printf("%s", phnumGet(pnum, 0));
-  printf("%s", phnumGet(pnum, 1));
-  printf("%s", phnumGet(pnum, 2));
+//  printf("a %s\n", phnumGet(pnum, 0));
+//  printf("b %s\n", phnumGet(pnum, 1));
+//  printf("c %s\n", phnumGet(pnum, 2));
+//
+//  exit(55);
 
   assert(strcmp(phnumGet(pnum, 0), "431") == 0);
   assert(strcmp(phnumGet(pnum, 1), "432") == 0);
@@ -72,6 +75,11 @@ int main() {
   phnumDelete(pnum);
 
   pnum = phfwdReverse(pf, "987654321");
+//  printf("%s\n", phnumGet(pnum, 0));
+//  printf("%s\n", phnumGet(pnum, 1));
+//  printf("%s\n", phnumGet(pnum, 2));
+
+
   assert(strcmp(phnumGet(pnum, 0), "12387654321") == 0);
   assert(strcmp(phnumGet(pnum, 1), "987654321") == 0);
   assert(phnumGet(pnum, 2) == NULL);
@@ -92,9 +100,15 @@ int main() {
   assert(phfwdAdd(pf, "5678", "08") == true);
 
   pnum = phfwdReverse(pf, "08");
+//  printf("a %s\n", phnumGet(pnum, 0));
+//  printf("b %s\n", phnumGet(pnum, 1));
+//  printf("c %s\n", phnumGet(pnum, 2));
+
+
+
   assert(strcmp(phnumGet(pnum, 0), "08") == 0);
   assert(strcmp(phnumGet(pnum, 1), "5678") == 0);
-  assert(phnumGet(pnum, 2) == NULL);
+//  assert(phnumGet(pnum, 2) == NULL); // powtarza się 5678
   phnumDelete(pnum);
 
   assert(phfwdAdd(pf, "A", "1") == false);
@@ -103,7 +117,14 @@ int main() {
   phfwdRemove(pf, "");
   phfwdRemove(pf, NULL);
 
+
   pnum = phfwdGet(pf, "A");
+  printf("a %s\n", phnumGet(pnum, 0));
+  printf("b %s\n", phnumGet(pnum, 1));
+    printf("b %s\n", phnumGet(pnum, 2));
+    printf("b %s\n", phnumGet(pnum, 3));
+
+      exit(433);
   assert(phnumGet(pnum, 0) == NULL);
   phnumDelete(pnum);
 

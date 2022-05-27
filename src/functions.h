@@ -19,6 +19,8 @@
  */
 bool getInteger(int* num, char character);
 
+void copyNumber(char* numCopy, char const *num);
+
 char* reverseNum(char const* num); //nowe!!!!!!!!!!
 
 #endif //PHONE_NUMBERS_FUNCTIONS_H

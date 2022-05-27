@@ -44,6 +44,14 @@ C:/programs/IPP_duze_zadanie/src/forward.h
 reverse_functions.h
 C:/programs/IPP_duze_zadanie/src/reverse_functions.h
 
+C:/programs/IPP_duze_zadanie/src/phone_forward_example.c
+phone_forward.h
+C:/programs/IPP_duze_zadanie/src/phone_forward.h
+assert.h
+-
+string.h
+-
+
 C:/programs/IPP_duze_zadanie/src/phone_numbers.h
 trie.h
 C:/programs/IPP_duze_zadanie/src/trie.h

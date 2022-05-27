@@ -22,17 +22,18 @@ Trie findMaxForward(Trie* arr, size_t i, char const *numToFind, Trie maxPref, bo
     return maxPref;
 }
 
-Trie setForwardingEndAndSizes(Trie maxPref, size_t* maxPrefSize, size_t* forwardingSize) {
+Trie setForwardingEndAndSizes(Trie maxPref, size_t* forwardingSize) {
     Trie forwardingEnd;
     if (maxPref == NULL) {
         forwardingEnd = NULL;
-        *maxPrefSize = 0;
-        *forwardingSize = 0;
-    }
-    else {
+        *forwardingSize = 100;
+//        *forwardingSize = 0;
+    } else {
         forwardingEnd = maxPref->forward;
-        *maxPrefSize = maxPref->depth;
-        *forwardingSize = forwardingEnd->depth;
+        *forwardingSize = maxPref->depth;
+//        if (maxPref->depth == 0) { *forwardingSize = 100; }
+//        else { *forwardingSize = maxPref->depth; }
+//        printf("fsize %zd\n", maxPref->depth);
     }
 
     return forwardingEnd;
@@ -53,27 +54,36 @@ void setRestOfNumber(char* forwardedNumber, char const *initialNum, size_t initi
     }
 }
 
-char* getForwardedNumber(Trie tr, char const *initialNum, size_t initialNumSize){
-    Trie* arr = tr->arrayOfTries;
+char* getForwardedNumber(Trie tr, char const *initialNum, size_t initialNumSize, size_t* numberSplitIndex) {
+    Trie *arr = tr->arrayOfTries;
 
     bool isNumCorrect;
     Trie maxPref = findMaxForward(arr, 0, initialNum, NULL, &isNumCorrect);
 
-    if (!isNumCorrect) { return calloc(1, sizeof(char)); }
+    if (!isNumCorrect) { return NULL; }
 
-    size_t maxPrefSize, forwardingSize;
-    Trie forwardingEnd = setForwardingEndAndSizes(maxPref, &maxPrefSize, &forwardingSize);
+    Trie forwardedPart = setForwardingEndAndSizes(maxPref, numberSplitIndex);
+    if (forwardedPart == NULL) { return calloc(1, sizeof(char)); }
 
-    size_t solNumberSize = forwardingSize + initialNumSize - maxPrefSize;
+    char *maxPrefChar = calloc(*numberSplitIndex + 1, sizeof(char)); //maxPref->depth
+    if (maxPrefChar == NULL) { return NULL; }
 
-    char* forwardedNumber = calloc(solNumberSize+1, sizeof(char));
-    if (forwardedNumber == NULL) { return NULL; }
+    getNumberFromTrie(forwardedPart, maxPrefChar, forwardedPart->depth - 1);
 
-    setForwardingInNumber(forwardingEnd, forwardedNumber, forwardingSize);
-    setRestOfNumber(forwardedNumber, initialNum, initialNumSize, maxPrefSize, forwardingSize);
-
-    return forwardedNumber;
+    return maxPrefChar;
 }
+
+//    size_t maxPrefSize, numberSplitIndex;
+//    size_t solNumberSize = numberSplitIndex + initialNumSize - maxPrefSize;
+//
+//    char* forwardedNumber = calloc(solNumberSize+1, sizeof(char));
+//    if (forwardedNumber == NULL) { return NULL; }
+//
+//    setForwardingInNumber(forwardingEnd, forwardedNumber, numberSplitIndex);
+//    setRestOfNumber(forwardedNumber, initialNum, initialNumSize, maxPrefSize, numberSplitIndex);
+//
+//    return forwardedNumber;
+
 
 void removeForwards(Trie tr){
     if (tr != NULL) {

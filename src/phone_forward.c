@@ -23,22 +23,43 @@ bool phfwdAdd(PhoneForward *pf, char const *num1, char const *num2) {
 }
 
 PhoneNumbers* phfwdGet(PhoneForward const *pf, char const *num) {
-    if (num == NULL) { return phnumNew(0, NULL, NULL, 'f');}
-    if (num == NULL || pf == NULL) { return NULL;}
+    if (num == NULL) { return phnumNew(0, NULL, NULL, NULL); }
+    if (num == NULL || pf == NULL) { return NULL; }
 
     Trie trieOfNumbers = trieNew(NULL, NULL, 0, 'e');
     if (trieOfNumbers == NULL || trieOfNumbers->arrayOfTries == NULL) { return NULL; } // problemy z alokacja
 
+    char* numCopy = calloc(strlen(num)+1, sizeof(char));
+    if (numCopy == NULL) { return NULL; }
+    copyNumber(numCopy, num);
+
+//    printf("copy %zd\n", strlen(numCopy));
+//    printf("num %zd\n", strlen(num));
+
     Trie* arrayOfNumbersEnd = calloc(1, sizeof(Trie));
 
-    char* forwardedNumber = getForwardedNumber(pf->trieOfForwards, num, strlen(num));
+    size_t numberSplitIndex;
+    char* forwardPref = getForwardedNumber(pf->trieOfForwards, num, strlen(num), &numberSplitIndex);
+    if (forwardPref == NULL) {
+        printf("aaa\n");
+        return NULL; }
 
-    Trie numberPtr = addNumber(trieOfNumbers, forwardedNumber);
+    if (strlen(forwardPref) == 0) {
+//        printf("aa3a\n");
+        PhoneNumbers* pn = phnumNew(0, trieOfNumbers, arrayOfNumbersEnd, numCopy);
+        if (pn->arrayOfNumbers == NULL) { return NULL; }
+        return pn;
+    }
+
+    Trie numberPtr = addNumber(trieOfNumbers, forwardPref);
+    if (numberPtr == NULL) { return NULL; }
+
     arrayOfNumbersEnd[0] = numberPtr;
+    numberPtr->forwardCounter = numberSplitIndex;
 
-    free(forwardedNumber);
+    free(forwardPref);
 
-    PhoneNumbers* pn = phnumNew(1, trieOfNumbers, arrayOfNumbersEnd, 'f');
+    PhoneNumbers* pn = phnumNew(1, trieOfNumbers, arrayOfNumbersEnd, numCopy);
     if (pn->arrayOfNumbers == NULL) { return NULL; }
 
     return pn;
@@ -46,13 +67,20 @@ PhoneNumbers* phfwdGet(PhoneForward const *pf, char const *num) {
 
 char const *phnumGet(PhoneNumbers const *pnum, size_t idx) {
     if (pnum == NULL || idx >= pnum->numberOfTries) { return NULL; }
-//    printf("%zd", pnum->numberOfTries);
+
+    if (pnum->numberOfTries == 0) { // mozna uproscic
+//        printf("dfdsf %zd\n", strlen(pnum->initNumber));
+        char* number = calloc(strlen(pnum->initNumber)+1, sizeof(char)); // tu dodałem 1 na pałe
+        copyNumber(number, pnum->initNumber);
+        return number;
+    }
 
     Trie* arr = pnum->arrayOfNumbersEnd;
     if (arr == NULL) { return NULL; }
 
     Trie tr = arr[idx];
     if (tr == NULL) { return NULL; }
+//    printf("nTreis %zd\n", pnum->numberOfTries);
 
     return getNumber(pnum, tr);
 }
@@ -70,10 +98,20 @@ void phfwdRemove(PhoneForward *pf, char const *num) {
 PhoneNumbers* phfwdReverse(PhoneForward const *pf, char const *num) {
     if (pf == NULL || num == NULL) { return NULL; }
 
+    char* numCopy = calloc(strlen(num)+1, sizeof(char));
+    if (numCopy == NULL) { return NULL; }
+    copyNumber(numCopy, num);
+
+//    printf("numCopy %zd\n", strlen(numCopy));
+//    printf("num %zd\n",strlen(num));
+
+//    Trie phoneTrie = trieNew(NULL, NULL, 0, 'r');
+//    if (phoneTrie == NULL) { return NULL; }
+
     Trie phoneTrie = preparePhoneTrie(num); // przygotowuje nowe drzewo
 
     size_t nForwarded = 0;
-    size_t forwardCounter = 0;
+    size_t forwardCounter = 1;
 
     Trie* forwardedNumPrefs = findForwardedNumPrefInPF(pf->trieOfForwards, num, &nForwarded, &forwardCounter); // zwraca tablice tych co przekierowują
     addForwardsFromPFToPhoneTrie(pf->trieOfForwards, phoneTrie, forwardedNumPrefs, &nForwarded); // przelatuje drzewo w pf, dodaje elementy do phone trie
@@ -82,9 +120,12 @@ PhoneNumbers* phfwdReverse(PhoneForward const *pf, char const *num) {
 
     Trie* arrayOfNumbersEnd = createArrNumbersLexSorted(phoneTrie, forwardCounter); // tworzy leksykograficzną talbicę końców
 
+//    printf("%c\n", arrayOfNumbersEnd[0]->up->up->upIndex);
+//    printf("%c\n", arrayOfNumbersEnd[1]->up->up->upIndex);
     // trzeba jeszcze get poprawić
 
-    return phnumNew(forwardCounter, phoneTrie, arrayOfNumbersEnd, 'r');
+//    printf("%zd\n", forwardCounter);
+    return phnumNew(forwardCounter, phoneTrie, arrayOfNumbersEnd, numCopy);
 //    return phnumNew(NULL, NULL);
 }
 

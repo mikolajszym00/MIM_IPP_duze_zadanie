@@ -8,6 +8,12 @@ bool getInteger(int* num, char character) {
     else { return false; }
 }
 
+void copyNumber(char* numCopy, char const *num) {
+    for (size_t i=0; i<strlen(num); i++) {
+        numCopy[i] = num[i];
+    }
+}
+
 char* reverseNum(char const* num) {
     size_t n = strlen(num);
 

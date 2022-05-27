@@ -26,10 +26,16 @@ void getNumberFromTrie(Trie tr, char* number, size_t i) {
 Trie goToNumberEndTrie(Trie tr, char const* num) {
     int index;
 
+//    printf("%s\n", num);
+
+
     Trie* arr = tr->arrayOfTries;
     for (size_t i = 0; i < strlen(num); ++i){
+//        printf("%zd\n", i);
         if (!getInteger(&index, num[i])) { return NULL; }
-        if (arr[index] == NULL) { return NULL; }
+        if (arr[index] == NULL) {
+//            printf("ssd\n");
+            return NULL; }
 
         tr = arr[index];
         arr = tr->arrayOfTries;
@@ -49,6 +55,11 @@ void findForwardedNumPrefInTrie(Trie* forwardedNumPrefs, size_t* freeIndex, Trie
         tr = arr[index];
 
         if (tr->forwardCounter > 0) { // czy jesli przekierowanie jest na piewrszym to zadziała
+//            char* tree = calloc(tr->depth+1, sizeof(char));
+//            getNumberFromTrie(tr, tree, tr->depth-1);
+//            printf("%s\n", tree);
+//            printf("%s\n", num);
+//            printf("forcounter %zd\n", tr->forwardCounter);
             *forwardCounter += tr->forwardCounter;
 
             forwardedNumPrefs[*freeIndex] = tr;
@@ -59,13 +70,13 @@ void findForwardedNumPrefInTrie(Trie* forwardedNumPrefs, size_t* freeIndex, Trie
     }
 }
 
-void searchTrie(Trie tr, void (*searchFunc)(Trie, Trie*, size_t*), Trie* forwardedNumPrefs, size_t* nForwarded) { // tr to korzeń
-    searchFunc(tr, forwardedNumPrefs, nForwarded);
+void searchTrie(Trie tr, Trie phoneTrie, void (*searchFunc)(Trie, Trie, Trie*, size_t*), Trie* forwardedNumPrefs, size_t* nForwarded) { // tr to korzeń
+    searchFunc(tr, phoneTrie, forwardedNumPrefs, nForwarded);
     Trie* arr = tr->arrayOfTries;
 
     for (int i=0; i<10; i++) {
         if (arr[i] != NULL) {
-            searchTrie(arr[i], searchFunc, forwardedNumPrefs, nForwarded);
+            searchTrie(arr[i], phoneTrie, searchFunc, forwardedNumPrefs, nForwarded);
         }
     }
 

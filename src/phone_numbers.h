@@ -19,6 +19,7 @@ struct PhoneNumbers {
     Trie trieOfNumbers; ///< korzeń drzewa zawierający przekierowane numery telefonów
     Trie* arrayOfNumbersEnd; ///< tablica węzłów zawierających ostatnie elementy numerów
     char** arrayOfNumbers; ///< tablica zawierająca wskaźniki na ciągi numerów telefonów
+    char* initNumber;
     size_t numberOfTries; ///< nowe!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     char type;
 };
@@ -31,7 +32,7 @@ typedef struct PhoneNumbers PhoneNumbers;
  * @return Wskaźnik na utworzoną strukturę lub NULL, gdy nie udało się
  *         alokować pamięci.
  */
-PhoneNumbers* phnumNew(size_t numberOfTries, Trie trieOfNumbers, Trie* arrayOfNumbersEnd, char type); // !!! nowe parametry
+PhoneNumbers* phnumNew(size_t numberOfTries, Trie trieOfNumbers, Trie* arrayOfNumbersEnd, char* initNumber); // !!! nowe parametry
 
 /** @brief Dodaje do tablicy wskaźnik na przekierowany numer.
  * @param[in] pnum     – wskaźnik na strukturę przechowującą numery telefonów;
