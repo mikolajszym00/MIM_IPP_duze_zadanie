@@ -30,9 +30,9 @@ void checkPrefs(Trie tr, Trie phoneTrie, Trie* forwardedNumPrefs, size_t* nForwa
 
     for (size_t i=0; i<*nForwarded; i++) {
         if (tr->forward == forwardedNumPrefs[i]) {
-            char* newNum = calloc(tr->depth+1, sizeof(char)); // bez +1?
+            char* newNum = calloc(tr->depth+1, sizeof(char));
 
-            getNumberFromTrie(tr, newNum, tr->depth-1); // całkiem podobne do prepare phone trie
+            getNumberFromTrie(tr, newNum); // , tr->depth-1// całkiem podobne do prepare phone trie
 
 //            printf("%s\n", newNum);
 
@@ -42,7 +42,6 @@ void checkPrefs(Trie tr, Trie phoneTrie, Trie* forwardedNumPrefs, size_t* nForwa
 //            printf("%zd", phoneTrieEnd->forwardCounter);
 
             Trie numEnd = addNumber(phoneTrie, newNum);
-
 
             free(newNum);
 

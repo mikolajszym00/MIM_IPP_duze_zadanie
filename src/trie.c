@@ -14,12 +14,13 @@ Trie trieNew(Trie forward, Trie up, size_t depth, char upIndex) {
     return tr;
 }
 
-void getNumberFromTrie(Trie tr, char* number, size_t i) {
-    if (tr->depth > 0){
+void getNumberFromTrie(Trie tr, char* number) {
+    for (int i=tr->depth-1; i>=0; --i) { // tu jest int bo nie działa z size_t
         number[i] = tr->upIndex;
 
-        --i;
-        getNumberFromTrie(tr->up, number, i);
+        if (tr->depth > 0) {
+            tr = tr->up;
+        }
     }
 }
 

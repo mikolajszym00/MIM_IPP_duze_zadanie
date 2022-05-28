@@ -55,7 +55,8 @@ Trie trieNew(Trie forward, Trie up, size_t depth, char upIndex);
  *                         telefonu;
  * @param[in] i          – indeks numeru telefonu.
  */
-void getNumberFromTrie(Trie tr, char* number, size_t i);
+//void getNumberFromTrie(Trie tr, char* number, size_t i); //zmiana!!!
+void getNumberFromTrie(Trie tr, char* number);
 
 /** @brief Wyszukuje węzeł @p tr, w którym kończy sie @p num.
  * @param[in] tr     – wskaźnik na korzeń drzewa;

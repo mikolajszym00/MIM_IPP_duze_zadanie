@@ -1,5 +1,4 @@
 #include "phone_numbers.h"
-#include "forward.h" // nieeee
 
 PhoneNumbers* phnumNew(size_t numberOfTries, Trie trieOfNumbers, Trie* arrayOfNumbersEnd, char* initNumber) {
     PhoneNumbers* pn = malloc(sizeof(struct PhoneNumbers));
@@ -18,11 +17,11 @@ void addNumbersPtrToArray(PhoneNumbers const *pnum, char* number) {
     arr[0] = number;
 }
 
-//void setRestOfNumber(char* forwardedNumber, char const *initialNum, size_t initialNumSize, size_t maxPrefSize, size_t forwardingSize) {
-//    for (size_t i=0; i < initialNumSize - maxPrefSize; ++i){
-//        forwardedNumber[forwardingSize + i] = initialNum[maxPrefSize + i];
-//    }
-//}
+void setRestOfNumber(char* forwardedNumber, char const *initialNum, size_t initialNumSize, size_t maxPrefSize, size_t forwardingSize) {
+    for (size_t i=0; i < initialNumSize - maxPrefSize; ++i){
+        forwardedNumber[forwardingSize + i] = initialNum[maxPrefSize + i];
+    }
+}
 
 char* getNumber(PhoneNumbers const *pnum, Trie tr) {
     char* initNumber = pnum->initNumber;
@@ -37,7 +36,7 @@ char* getNumber(PhoneNumbers const *pnum, Trie tr) {
     if (number == NULL) { return NULL; } // moze tak
 
 //    printf("len %zd\n", forwardingLen + strlen(initNumber) - forwardedLen);
-    getNumberFromTrie(tr, number, forwardingLen - 1);
+    getNumberFromTrie(tr, number); //, ) , forwardingLen - 1
 
 //    printf("strlen %zd\n", strlen(initNumber));
 //    printf("tr %zd\n", forwardedLen);

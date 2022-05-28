@@ -48,12 +48,6 @@ void setForwardingInNumber(Trie forwardElement, char* forwardedNumber, size_t fo
     }
 }
 
-void setRestOfNumber(char* forwardedNumber, char const *initialNum, size_t initialNumSize, size_t maxPrefSize, size_t forwardingSize) {
-    for (size_t i=0; i < initialNumSize - maxPrefSize; ++i){
-        forwardedNumber[forwardingSize + i] = initialNum[maxPrefSize + i];
-    }
-}
-
 char* getForwardedNumber(Trie tr, char const *initialNum, size_t initialNumSize, size_t* numberSplitIndex) {
     Trie *arr = tr->arrayOfTries;
 
@@ -68,7 +62,7 @@ char* getForwardedNumber(Trie tr, char const *initialNum, size_t initialNumSize,
     char *maxPrefChar = calloc(*numberSplitIndex + 1, sizeof(char)); //maxPref->depth
     if (maxPrefChar == NULL) { return NULL; }
 
-    getNumberFromTrie(forwardedPart, maxPrefChar, forwardedPart->depth - 1);
+    getNumberFromTrie(forwardedPart, maxPrefChar); //,, forwardedPart->depth - 1
 
     return maxPrefChar;
 }

@@ -41,7 +41,6 @@ PhoneNumbers* phfwdGet(PhoneForward const *pf, char const *num) {
     size_t numberSplitIndex;
     char* forwardPref = getForwardedNumber(pf->trieOfForwards, num, strlen(num), &numberSplitIndex);
     if (forwardPref == NULL) {
-        printf("aaa\n");
         return NULL; }
 
     if (strlen(forwardPref) == 0) {
@@ -66,7 +65,7 @@ PhoneNumbers* phfwdGet(PhoneForward const *pf, char const *num) {
 }
 
 char const *phnumGet(PhoneNumbers const *pnum, size_t idx) {
-    if (pnum == NULL || idx >= pnum->numberOfTries) { return NULL; }
+    if (pnum == NULL) { return NULL; }
 
     if (pnum->numberOfTries == 0) { // mozna uproscic
 //        printf("dfdsf %zd\n", strlen(pnum->initNumber));
@@ -74,6 +73,8 @@ char const *phnumGet(PhoneNumbers const *pnum, size_t idx) {
         copyNumber(number, pnum->initNumber);
         return number;
     }
+
+    if (idx >= pnum->numberOfTries) { return NULL; }
 
     Trie* arr = pnum->arrayOfNumbersEnd;
     if (arr == NULL) { return NULL; }
@@ -109,6 +110,7 @@ PhoneNumbers* phfwdReverse(PhoneForward const *pf, char const *num) {
 //    if (phoneTrie == NULL) { return NULL; }
 
     Trie phoneTrie = preparePhoneTrie(num); // przygotowuje nowe drzewo
+    if (phoneTrie == NULL) { return NULL; }
 
     size_t nForwarded = 0;
     size_t forwardCounter = 1;
@@ -122,11 +124,9 @@ PhoneNumbers* phfwdReverse(PhoneForward const *pf, char const *num) {
 
 //    printf("%c\n", arrayOfNumbersEnd[0]->up->up->upIndex);
 //    printf("%c\n", arrayOfNumbersEnd[1]->up->up->upIndex);
-    // trzeba jeszcze get poprawić
 
 //    printf("%zd\n", forwardCounter);
     return phnumNew(forwardCounter, phoneTrie, arrayOfNumbersEnd, numCopy);
-//    return phnumNew(NULL, NULL);
 }
 
 void phfwdDelete(PhoneForward *pf){

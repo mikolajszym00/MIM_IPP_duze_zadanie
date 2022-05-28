@@ -42,6 +42,17 @@ PhoneNumbers* phnumNew(size_t numberOfTries, Trie trieOfNumbers, Trie* arrayOfNu
  */
 void addNumbersPtrToArray(PhoneNumbers const *pnum, char* number);
 
+/** @brief Przepisuje nieprzekierowaną część @p initialNum do @p forwardedNumber.
+ * @param[in, out] forwardedNumber – wskaźnik na napis reprezentujący przkierowany numer;
+ * @param[in] initialNum           – wskaźnik na napis reprezentujący wejściowy numer;
+ * @param[in] initialNumSize       – długość wejściowego numeru;
+ * @param[in] maxPrefSize          – długość prefiksu wejściowego numeru;
+ * @param[in] forwardingSize       – długość przekierowania.
+ *
+ */
+void setRestOfNumber(char* forwardedNumber, char const *initialNum, size_t initialNumSize, size_t maxPrefSize, size_t forwardingSize);
+
+
 char* getNumber(PhoneNumbers const *pnum, Trie tr);
 
 #endif //PHONE_NUMBERS_PHONE_NUMBERS_H

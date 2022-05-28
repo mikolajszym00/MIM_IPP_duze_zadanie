@@ -46,16 +46,6 @@ Trie setForwardingEndAndSizes(Trie maxPref, size_t* forwardingSize); // zmiannaa
  */
 void setForwardingInNumber(Trie forwardElement, char* forwardedNumber, size_t forwardingSize);
 
-/** @brief Przepisuje nieprzekierowaną część @p initialNum do @p forwardedNumber.
- * @param[in, out] forwardedNumber – wskaźnik na napis reprezentujący przkierowany numer;
- * @param[in] initialNum           – wskaźnik na napis reprezentujący wejściowy numer;
- * @param[in] initialNumSize       – długość wejściowego numeru;
- * @param[in] maxPrefSize          – długość prefiksu wejściowego numeru;
- * @param[in] forwardingSize       – długość przekierowania.
- *
- */
-void setRestOfNumber(char* forwardedNumber, char const *initialNum, size_t initialNumSize, size_t maxPrefSize, size_t forwardingSize);
-
 /** @brief Wyznacza przekierowany numer.
  * @param[in] tr             – wskaźnik na korzeń drzewa przechowywującego numery i przekierowania;
  * @param[in] initialNum     – wskaźnik na napis reprezentujący wejściowy numer;
