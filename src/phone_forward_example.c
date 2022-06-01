@@ -79,7 +79,6 @@ int main() {
 //  printf("%s\n", phnumGet(pnum, 1));
 //  printf("%s\n", phnumGet(pnum, 2));
 
-
   assert(strcmp(phnumGet(pnum, 0), "12387654321") == 0);
   assert(strcmp(phnumGet(pnum, 1), "987654321") == 0);
   assert(phnumGet(pnum, 2) == NULL);
@@ -108,7 +107,7 @@ int main() {
 
   assert(strcmp(phnumGet(pnum, 0), "08") == 0);
   assert(strcmp(phnumGet(pnum, 1), "5678") == 0);
-//  assert(phnumGet(pnum, 2) == NULL); // powtarza się 5678
+  assert(phnumGet(pnum, 2) == NULL); // powtarza się 5678
   phnumDelete(pnum);
 
   assert(phfwdAdd(pf, "A", "1") == false);
@@ -135,9 +134,14 @@ int main() {
   phfwdAdd(pf, "2", "4");
   phfwdAdd(pf, "23", "4");
   pnum = phfwdReverse(pf, "434");
+//  printf("a %s\n", phnumGet(pnum, 0));
+//  printf("b %s\n", phnumGet(pnum, 1));
+//  printf("c %s\n", phnumGet(pnum, 2));
 
-//  assert(strcmp(phnumGet(pnum, 0), "2334") == 0); // jest odwrotnie bo reszta numeru jest dodawana na końcu
-//  assert(strcmp(phnumGet(pnum, 1), "234") == 0);
+//  exit(55);
+
+  assert(strcmp(phnumGet(pnum, 0), "2334") == 0); // jest odwrotnie bo reszta numeru jest dodawana na końcu
+  assert(strcmp(phnumGet(pnum, 1), "234") == 0);
   assert(strcmp(phnumGet(pnum, 2), "434") == 0);
   assert(phnumGet(pnum, 3) == NULL);
   phnumDelete(pnum);

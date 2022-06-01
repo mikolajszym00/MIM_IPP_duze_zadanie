@@ -31,12 +31,12 @@ Trie findMaxForward(Trie* arr, size_t i, char const *numToFind, Trie maxPref, bo
  * zwracane są wartości pozwalające stworzyć numer idetyczny do wejściowego.
  * @param[in] maxPref                – wskaźnik na węzeł drzwa zawierający ostatni element
  *                                     prefiksu;
- * @param[in, out] maxPrefSize       – długość prefiksu;
+ * @param[in, out] numberSplitIndex       – długość prefiksu;
  * @param[in, out] forwardingSize    – długość przekierowania.
  * @return Wskaźnik na węzeł zawierający koniec numeru będzącego najdłuższym przekierowaniem dla
  * numeru wejściowego. Zwraca NULL, gdy @p maxPref jest NULL.
  */
-Trie setForwardingEndAndSizes(Trie maxPref, size_t* forwardingSize); // zmiannaaaaa
+Trie setForwardingEndAndSizes(Trie maxPref, size_t* numberSplitIndex); // zmianaaaaa
 
 /** @brief Przepisuje przekierowanie do @p forwardedNumber.
  * @param[in] forwardElement       – wskaźnik na węzeł drzwa zawierający ostatni element

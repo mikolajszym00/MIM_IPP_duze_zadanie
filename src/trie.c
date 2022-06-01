@@ -4,7 +4,7 @@ Trie trieNew(Trie forward, Trie up, size_t depth, char upIndex) {
     Trie tr = malloc(sizeof(struct Node));
     if (tr == NULL) { return NULL; }
 
-    tr->arrayOfTries = calloc(10, sizeof(Trie));
+    tr->arrayOfTries = calloc(NUM, sizeof(Trie));
     tr->forwardCounter = 0;
     tr->forward = forward;
     tr->up = up;
@@ -15,8 +15,19 @@ Trie trieNew(Trie forward, Trie up, size_t depth, char upIndex) {
 }
 
 void getNumberFromTrie(Trie tr, char* number) {
-    for (int i=tr->depth-1; i>=0; --i) { // tu jest int bo nie działa z size_t
-        number[i] = tr->upIndex;
+    size_t initDepth = tr->depth;
+    for (size_t i=0; i<initDepth; ++i) {
+        number[initDepth - 1 - i] = tr->upIndex;
+
+        if (tr->depth > 0) {
+            tr = tr->up;
+        }
+    }
+}
+
+void getNumberFromTrieWithStop(Trie tr, size_t stop, char* number) { // można połączyć z powyżej
+    for (size_t i=0; i<stop; ++i) {
+        number[stop - 1 - i] = tr->upIndex;
 
         if (tr->depth > 0) {
             tr = tr->up;
@@ -75,7 +86,7 @@ void searchTrie(Trie tr, Trie phoneTrie, void (*searchFunc)(Trie, Trie, Trie*, s
     searchFunc(tr, phoneTrie, forwardedNumPrefs, nForwarded);
     Trie* arr = tr->arrayOfTries;
 
-    for (int i=0; i<10; i++) {
+    for (int i=0; i<NUM; i++) {
         if (arr[i] != NULL) {
             searchTrie(arr[i], phoneTrie, searchFunc, forwardedNumPrefs, nForwarded);
         }

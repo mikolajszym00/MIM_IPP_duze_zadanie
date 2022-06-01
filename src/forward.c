@@ -22,18 +22,14 @@ Trie findMaxForward(Trie* arr, size_t i, char const *numToFind, Trie maxPref, bo
     return maxPref;
 }
 
-Trie setForwardingEndAndSizes(Trie maxPref, size_t* forwardingSize) {
+Trie setForwardingEndAndSizes(Trie maxPref, size_t* numberSplitIndex) {
     Trie forwardingEnd;
     if (maxPref == NULL) {
         forwardingEnd = NULL;
-        *forwardingSize = 100;
-//        *forwardingSize = 0;
+        *numberSplitIndex = 0;
     } else {
         forwardingEnd = maxPref->forward;
-        *forwardingSize = maxPref->depth;
-//        if (maxPref->depth == 0) { *forwardingSize = 100; }
-//        else { *forwardingSize = maxPref->depth; }
-//        printf("fsize %zd\n", maxPref->depth);
+        *numberSplitIndex = maxPref->depth;
     }
 
     return forwardingEnd;
@@ -87,7 +83,7 @@ void removeForwards(Trie tr){
         }
 
         Trie* arr = tr->arrayOfTries;
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < NUM; ++i) {
             removeForwards(arr[i]);
         }
     }

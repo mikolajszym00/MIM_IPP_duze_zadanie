@@ -3,7 +3,7 @@
 bool IsTrieDeeper(Trie tr) {
     Trie *arr = tr->arrayOfTries;
 
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < NUM; ++i) {
         if (arr[i] != NULL) { return true; }
     }
     return false;
@@ -33,7 +33,7 @@ Trie findUnusedTrie(Trie tr) {
             return temp;
         }
 
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < NUM; ++i) {
             if (arr[i] != NULL && value - '0' != i) {
                 Trie temp =  arr[value - '0'];
                 arr[value - '0'] = NULL;
@@ -49,7 +49,7 @@ Trie findUnusedTrie(Trie tr) {
 void deleteTrie(Trie tr) {
     if (tr != NULL) {
         Trie *arr = tr->arrayOfTries;
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < NUM; ++i) {
             deleteTrie(arr[i]);
         }
         free(arr);

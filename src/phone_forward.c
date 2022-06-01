@@ -23,8 +23,10 @@ bool phfwdAdd(PhoneForward *pf, char const *num1, char const *num2) {
 }
 
 PhoneNumbers* phfwdGet(PhoneForward const *pf, char const *num) {
-    if (num == NULL) { return phnumNew(0, NULL, NULL, NULL); }
+    if (num == NULL && pf != NULL) { return phnumNew(0, NULL, NULL, NULL); } // || (num == NULL && pf == NULL)
     if (num == NULL || pf == NULL) { return NULL; }
+
+    if (strlen(num) == 0 || !checkNum(num)) { return phnumNew(0, NULL, NULL, NULL); }
 
     Trie trieOfNumbers = trieNew(NULL, NULL, 0, 'e');
     if (trieOfNumbers == NULL || trieOfNumbers->arrayOfTries == NULL) { return NULL; } // problemy z alokacja
@@ -40,17 +42,13 @@ PhoneNumbers* phfwdGet(PhoneForward const *pf, char const *num) {
 
     size_t numberSplitIndex;
     char* forwardPref = getForwardedNumber(pf->trieOfForwards, num, strlen(num), &numberSplitIndex);
-    if (forwardPref == NULL) {
-        return NULL; }
+    if (forwardPref == NULL) { return NULL; }
 
-    if (strlen(forwardPref) == 0) {
-//        printf("aa3a\n");
-        PhoneNumbers* pn = phnumNew(0, trieOfNumbers, arrayOfNumbersEnd, numCopy);
-        if (pn->arrayOfNumbers == NULL) { return NULL; }
-        return pn;
-    }
+    Trie numberPtr;
 
-    Trie numberPtr = addNumber(trieOfNumbers, forwardPref);
+    if (strlen(forwardPref) == 0) { numberPtr = trieOfNumbers; }
+    else { numberPtr = addNumber(trieOfNumbers, forwardPref); }
+
     if (numberPtr == NULL) { return NULL; }
 
     arrayOfNumbersEnd[0] = numberPtr;
@@ -58,23 +56,14 @@ PhoneNumbers* phfwdGet(PhoneForward const *pf, char const *num) {
 
     free(forwardPref);
 
-    PhoneNumbers* pn = phnumNew(1, trieOfNumbers, arrayOfNumbersEnd, numCopy);
+    PhoneNumbers* pn = phnumNew(1, trieOfNumbers, arrayOfNumbersEnd, numCopy); // może nie robić numCopy
     if (pn->arrayOfNumbers == NULL) { return NULL; }
 
     return pn;
 }
 
 char const *phnumGet(PhoneNumbers const *pnum, size_t idx) {
-    if (pnum == NULL) { return NULL; }
-
-    if (pnum->numberOfTries == 0) { // mozna uproscic
-//        printf("dfdsf %zd\n", strlen(pnum->initNumber));
-        char* number = calloc(strlen(pnum->initNumber)+1, sizeof(char)); // tu dodałem 1 na pałe
-        copyNumber(number, pnum->initNumber);
-        return number;
-    }
-
-    if (idx >= pnum->numberOfTries) { return NULL; }
+    if (pnum == NULL || idx >= pnum->numberOfTries) { return NULL; }
 
     Trie* arr = pnum->arrayOfNumbersEnd;
     if (arr == NULL) { return NULL; }
@@ -97,7 +86,10 @@ void phfwdRemove(PhoneForward *pf, char const *num) {
 }
 
 PhoneNumbers* phfwdReverse(PhoneForward const *pf, char const *num) {
+    if (pf != NULL && num == NULL ) { return phnumNew(0, NULL, NULL, NULL); }
     if (pf == NULL || num == NULL) { return NULL; }
+
+    if (strlen(num) == 0 || !checkNum(num)) { return phnumNew(0, NULL, NULL, NULL); }
 
     char* numCopy = calloc(strlen(num)+1, sizeof(char));
     if (numCopy == NULL) { return NULL; }
@@ -109,7 +101,8 @@ PhoneNumbers* phfwdReverse(PhoneForward const *pf, char const *num) {
 //    Trie phoneTrie = trieNew(NULL, NULL, 0, 'r');
 //    if (phoneTrie == NULL) { return NULL; }
 
-    Trie phoneTrie = preparePhoneTrie(num); // przygotowuje nowe drzewo
+    Trie numberEnd;
+    Trie phoneTrie = preparePhoneTrie(num, &numberEnd); // przygotowuje nowe drzewo
     if (phoneTrie == NULL) { return NULL; }
 
     size_t nForwarded = 0;
@@ -120,7 +113,7 @@ PhoneNumbers* phfwdReverse(PhoneForward const *pf, char const *num) {
 
     free(forwardedNumPrefs);
 
-    Trie* arrayOfNumbersEnd = createArrNumbersLexSorted(phoneTrie, forwardCounter); // tworzy leksykograficzną talbicę końców
+    Trie* arrayOfNumbersEnd = createArrNumbersLexSorted(phoneTrie, numberEnd, forwardCounter); // tworzy leksykograficzną talbicę końców
 
 //    printf("%c\n", arrayOfNumbersEnd[0]->up->up->upIndex);
 //    printf("%c\n", arrayOfNumbersEnd[1]->up->up->upIndex);

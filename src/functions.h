@@ -11,6 +11,8 @@
 
 #include "trie.h"
 
+#define NUM 12
+
 /** @brief Zmienia znak na cyfrę.
  * @param[in,out] num     – wskaźnik na indeks;
  * @param[in] character   – wskaźnik na znak;
@@ -18,6 +20,8 @@
  *         Wartość @p false, jeśli nie można zmienić znaku na cyfrę.
  */
 bool getInteger(int* num, char character);
+
+bool checkNum(char const *num);
 
 void copyNumber(char* numCopy, char const *num);
 

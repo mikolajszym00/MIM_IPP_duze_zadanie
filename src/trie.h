@@ -67,6 +67,8 @@ void getNumberFromTrie(Trie tr, char* number);
  */
 Trie goToNumberEndTrie(Trie tr, char const* num);
 
+void getNumberFromTrieWithStop(Trie tr, size_t stop, char* number); // do usunięcia
+
 void findForwardedNumPrefInTrie(Trie* forwardedNumPrefs, size_t* freeIndex, Trie tr, char const* num, size_t* forwardCounter);
 
 void searchTrie(Trie tr, Trie phoneTrie, void (*searchFunc)(Trie, Trie, Trie*, size_t*), Trie* forwardedNumPrefs, size_t* nForwarded);
