@@ -66,12 +66,7 @@ void findForwardedNumPrefInTrie(Trie* forwardedNumPrefs, size_t* freeIndex, Trie
 
         tr = arr[index];
 
-        if (tr->forwardCounter > 0) { // czy jesli przekierowanie jest na piewrszym to zadziała
-//            char* tree = calloc(tr->depth+1, sizeof(char));
-//            getNumberFromTrie(tr, tree, tr->depth-1);
-//            printf("%s\n", tree);
-//            printf("%s\n", num);
-//            printf("forcounter %zd\n", tr->forwardCounter);
+        if (tr->forwardCounter > 0) {
             *forwardCounter += tr->forwardCounter;
 
             forwardedNumPrefs[*freeIndex] = tr;

@@ -13,14 +13,10 @@ Trie preparePhoneTrie(char const* num, Trie* numberEnd) {
     return phoneTrie;
 }
 
-Trie* findForwardedNumPrefInPF(Trie trieOfForwards, char const *num, size_t* nForwarded, size_t* forwardCounter) {
-    Trie* forwardedNumPrefs = calloc(strlen(num), sizeof(Trie)); // czy działa jeśli kazdy element ma przekierowanie
+Trie* findForwardedNumPrefInPF(Trie trieOfForwards, char const *num, size_t* freeIndex, size_t* forwardCounter) {
+    Trie* forwardedNumPrefs = calloc(strlen(num), sizeof(Trie));
 
-    findForwardedNumPrefInTrie(forwardedNumPrefs, nForwarded, trieOfForwards, num, forwardCounter);
-
-//    printf("%zd\n", forwardedNumPrefs[0]->forwardCounter);
-//    printf("%c\n", forwardedNumPrefs[0]->up->up->upIndex);
-//    realloc() // !!
+    findForwardedNumPrefInTrie(forwardedNumPrefs, freeIndex, trieOfForwards, num, forwardCounter);
 
     return forwardedNumPrefs;
 }
@@ -32,25 +28,13 @@ void checkPrefs(Trie tr, Trie phoneTrie, Trie* forwardedNumPrefs, size_t* nForwa
         if (tr->forward == forwardedNumPrefs[i]) {
             char* newNum = calloc(tr->depth+1, sizeof(char));
 
-            getNumberFromTrie(tr, newNum); // , tr->depth-1// całkiem podobne do prepare phone trie
-
-//            printf("%s\n", newNum);
-
-//            Trie phoneTrieEnd = goToNumberEndTrie(tr, newNum);
-
-//            if (phoneTrieEnd == NULL) {printf("erer");}
-//            printf("%zd", phoneTrieEnd->forwardCounter);
+            getNumberFromTrie(tr, newNum);
 
             Trie numEnd = addNumber(phoneTrie, newNum);
-
             free(newNum);
 
             if (numEnd == NULL) { return; }
-
             numEnd->forwardCounter = tr->forward->depth;
-
-//            if (tr->forward->depth == 0) { numEnd->forwardCounter = 100; }
-//            else { numEnd->forwardCounter = tr->forward->depth; }
         }
     }
 }

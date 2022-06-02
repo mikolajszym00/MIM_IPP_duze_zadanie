@@ -63,18 +63,6 @@ char* getForwardedNumber(Trie tr, char const *initialNum, size_t* numberSplitInd
     return maxPrefChar;
 }
 
-//    size_t maxPrefSize, numberSplitIndex;
-//    size_t solNumberSize = numberSplitIndex + initialNumSize - maxPrefSize;
-//
-//    char* forwardedNumber = calloc(solNumberSize+1, sizeof(char));
-//    if (forwardedNumber == NULL) { return NULL; }
-//
-//    setForwardingInNumber(forwardingEnd, forwardedNumber, numberSplitIndex);
-//    setRestOfNumber(forwardedNumber, initialNum, initialNumSize, maxPrefSize, numberSplitIndex);
-//
-//    return forwardedNumber;
-
-
 void removeForwards(Trie tr){
     if (tr != NULL) {
         if (tr->forward) {
