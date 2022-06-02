@@ -6,15 +6,15 @@ PhoneNumbers* phnumNew(size_t numberOfTries, Trie trieOfNumbers, Trie* arrayOfNu
 
     pn->trieOfNumbers = trieOfNumbers;
     pn->arrayOfNumbersEnd = arrayOfNumbersEnd;
-    pn->arrayOfNumbers = calloc(numberOfTries, sizeof(char*));
+    pn->arrayOfNumbers = calloc(numberOfTries, sizeof(char*)); // +-1
     pn->initNumber = initNumber;
     pn->numberOfTries = numberOfTries;
     return pn;
 }
 
-void addNumbersPtrToArray(PhoneNumbers const *pnum, char* number) {
+void addNumbersPtrToArray(PhoneNumbers const *pnum, char* number, size_t index) {
     char** arr = pnum->arrayOfNumbers;
-    arr[0] = number;
+    arr[index] = number;
 }
 
 void setRestOfNumber(char* forwardedNumber, char const *initialNum, size_t initialNumSize, size_t maxPrefSize, size_t forwardingSize) {
@@ -23,7 +23,7 @@ void setRestOfNumber(char* forwardedNumber, char const *initialNum, size_t initi
     }
 }
 
-char* getNumber(PhoneNumbers const *pnum, Trie tr) {
+char* getNumber(PhoneNumbers const *pnum, Trie tr, size_t index) {
     char* initNumber = pnum->initNumber;
     size_t forwardingLen = tr->depth;
     size_t forwardedLen = tr->forwardCounter;
@@ -32,7 +32,7 @@ char* getNumber(PhoneNumbers const *pnum, Trie tr) {
 //    else { maxPrefSize = tr->forwardCounter; }
 
 
-    char* number = calloc(forwardingLen + strlen(initNumber) - forwardedLen, sizeof(char));
+    char* number = calloc(forwardingLen + strlen(initNumber) - forwardedLen + 1, sizeof(char));
     if (number == NULL) { return NULL; } // moze tak
 
 //    printf("len %zd\n", forwardingLen + strlen(initNumber) - forwardedLen);
@@ -49,7 +49,7 @@ char* getNumber(PhoneNumbers const *pnum, Trie tr) {
 //        number[i] = initNumber[i-tr->forwardCounter];
 //    }
 
-    addNumbersPtrToArray(pnum, number); // źle!!!
+    addNumbersPtrToArray(pnum, number, index);
 
     return number;
 }

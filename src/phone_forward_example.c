@@ -9,9 +9,24 @@
 #define MAX_LEN 23
 
 int main() {
+    PhoneForward *pf;
+    PhoneNumbers *pnum;
+
+    // ############# THIS SECTION CONTAINS TESTS FOR PART 1 ######################
+    pf = phfwdNew();
+
+    // Add one number
+    assert(phfwdAdd(pf, "234", "23") == true);
+    pnum = phfwdGet(pf, "23499");
+    assert(strcmp(phnumGet(pnum, 0), "2399") == 0);
+    phnumDelete(pnum);
+
+    exit(54);
+
+
   char num1[MAX_LEN + 1], num2[MAX_LEN + 1];
-  PhoneForward *pf;
-  PhoneNumbers *pnum;
+//  PhoneForward *pf;
+//  PhoneNumbers *pnum;
 
   pf = phfwdNew();
 

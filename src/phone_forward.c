@@ -41,7 +41,7 @@ PhoneNumbers* phfwdGet(PhoneForward const *pf, char const *num) {
     Trie* arrayOfNumbersEnd = calloc(1, sizeof(Trie));
 
     size_t numberSplitIndex;
-    char* forwardPref = getForwardedNumber(pf->trieOfForwards, num, strlen(num), &numberSplitIndex);
+    char* forwardPref = getForwardedNumber(pf->trieOfForwards, num, &numberSplitIndex);
     if (forwardPref == NULL) { return NULL; }
 
     Trie numberPtr;
@@ -49,12 +49,12 @@ PhoneNumbers* phfwdGet(PhoneForward const *pf, char const *num) {
     if (strlen(forwardPref) == 0) { numberPtr = trieOfNumbers; }
     else { numberPtr = addNumber(trieOfNumbers, forwardPref); }
 
+    free(forwardPref);
+
     if (numberPtr == NULL) { return NULL; }
 
     arrayOfNumbersEnd[0] = numberPtr;
     numberPtr->forwardCounter = numberSplitIndex;
-
-    free(forwardPref);
 
     PhoneNumbers* pn = phnumNew(1, trieOfNumbers, arrayOfNumbersEnd, numCopy); // może nie robić numCopy
     if (pn->arrayOfNumbers == NULL) { return NULL; }
@@ -72,7 +72,7 @@ char const *phnumGet(PhoneNumbers const *pnum, size_t idx) {
     if (tr == NULL) { return NULL; }
 //    printf("nTreis %zd\n", pnum->numberOfTries);
 
-    return getNumber(pnum, tr);
+    return getNumber(pnum, tr, idx);
 }
 
 void phfwdRemove(PhoneForward *pf, char const *num) {
@@ -134,9 +134,12 @@ void phnumDelete(PhoneNumbers *pnum){
 
     deleteTrie(pnum->trieOfNumbers);
     if (pnum->arrayOfNumbersEnd != NULL && (pnum->arrayOfNumbersEnd)[0] != NULL) {
-        free((pnum->arrayOfNumbers)[0]);
+        for (size_t i=0; i<pnum->numberOfTries; i++) {
+            free((pnum->arrayOfNumbers)[i]);
+        }
     }
 
+    free(pnum->initNumber);
     free(pnum->arrayOfNumbers);
     free(pnum->arrayOfNumbersEnd);
 

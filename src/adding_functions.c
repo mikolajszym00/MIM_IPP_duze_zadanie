@@ -29,7 +29,7 @@ bool addForwarding(Trie numberEnd, Trie tr, char const *num2) {
     deleteForwardTrie(numberEnd->forward);
 
     numberEnd->forward = forwardingEnd;
-    ++forwardingEnd->forwardCounter;
+    ++(forwardingEnd->forwardCounter);
 
     return true;
 }

@@ -40,7 +40,7 @@ PhoneNumbers* phnumNew(size_t numberOfTries, Trie trieOfNumbers, Trie* arrayOfNu
  * @return Wskaźnik na utworzoną strukturę lub NULL, gdy nie udało się
  *         alokować pamięci.
  */
-void addNumbersPtrToArray(PhoneNumbers const *pnum, char* number);
+void addNumbersPtrToArray(PhoneNumbers const *pnum, char* number, size_t index); // zmiana !!!!
 
 /** @brief Przepisuje nieprzekierowaną część @p initialNum do @p forwardedNumber.
  * @param[in, out] forwardedNumber – wskaźnik na napis reprezentujący przkierowany numer;
@@ -53,6 +53,6 @@ void addNumbersPtrToArray(PhoneNumbers const *pnum, char* number);
 void setRestOfNumber(char* forwardedNumber, char const *initialNum, size_t initialNumSize, size_t maxPrefSize, size_t forwardingSize);
 
 
-char* getNumber(PhoneNumbers const *pnum, Trie tr);
+char* getNumber(PhoneNumbers const *pnum, Trie tr, size_t index);
 
 #endif //PHONE_NUMBERS_PHONE_NUMBERS_H

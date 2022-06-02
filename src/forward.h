@@ -53,7 +53,7 @@ void setForwardingInNumber(Trie forwardElement, char* forwardedNumber, size_t fo
  * @return wskaźnik na napis reprezentujący przekierowany numer lub NULL, gdy nie
  *         udało się alokować pamięci lub @p initialNum nie reprezentuje numeru.
  */
-char* getForwardedNumber(Trie tr, char const *initialNum, size_t initialNumSize, size_t* numberSplitIndex);
+char* getForwardedNumber(Trie tr, char const *initialNum, size_t* numberSplitIndex);
 
 /** @brief Usuwa przekierowania ze struktury opisującej numery i ich przekierowania.
  * Usuwa wszystkie przekierowania znajdujące się w poddrzewach ścieżki do przekierowywań,
