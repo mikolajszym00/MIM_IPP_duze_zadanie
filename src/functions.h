@@ -11,6 +11,9 @@
 
 #include "trie.h"
 
+/**
+ * Określa ilość znaków mogących być elementem numeru.
+ */
 #define NUM 12
 
 /** @brief Zmienia znak na cyfrę.
@@ -21,10 +24,17 @@
  */
 bool getInteger(int* num, char character);
 
+/** @brief Sprwadza czy numer składa się tylko z dopuszczalnych znaków.
+ * @param[in,out] num     – wskaźnik na numer;
+ * @return Wartość @p true, jeśli numer zawiera dopuszczalne znaki.
+ *         Wartość @p false, eśli numer zawiera niedopuszczalne znaki.
+ */
 bool checkNum(char const *num);
 
+/** @brief Kopiuje numer.
+ * @param[in] numCopy – wskaźnik na kopię numeru;
+ * @param[in] num     – wskaźnik na numer.
+ */
 void copyNumber(char* numCopy, char const *num);
-
-char* reverseNum(char const* num); //nowe!!!!!!!!!!
 
 #endif //PHONE_NUMBERS_FUNCTIONS_H

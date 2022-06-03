@@ -18,9 +18,13 @@
 #include "functions.h"
 
 /**
- * Struktura przechowująca numery.
+ * definicja typu struktury przechowującej numery.
  */
 typedef struct Node* Trie;
+
+/**
+ * Struktura przechowująca numery.
+ */
 struct Node {
     Trie* arrayOfTries;    ///< wskaźnik na tablice poddrzew
     size_t forwardCounter; ///< ilość numerów, które zostały przekierowane na dany numer
@@ -50,10 +54,10 @@ Trie trieNew(Trie forward, Trie up, size_t depth, char upIndex);
 /** @brief Przypisuje numerowi wartosci z drzewa.
  * Przypisuje kolejne wartości na numer @p num na podstawie kolejnych
  * wartości @p tr.
- * @param[in] tr        – wskaźnik na ostatni element numeru w drzewie;
- * @param[in, out] num  – wskaźnik na napis reprezentujący numer
- *                        telefonu;
- * @param[in] stop      – wartość określająca długość numeru.
+ * @param[in] tr          – wskaźnik na ostatni element numeru w drzewie;
+ * @param[in, out] number – wskaźnik na napis reprezentujący numer
+ *                          telefonu;
+ * @param[in] stop        – wartość określająca długość numeru.
  */
 void getNumberFromTrie(Trie tr, char* number, size_t stop);
 
@@ -75,7 +79,6 @@ Trie goToNumberEndTrie(Trie tr, char const* num);
  */
 void findForwardedNumPrefInTrie(Trie tr, Trie* forwardedNumPrefs, size_t* freeIndex, char const* num, size_t* forwardCounter);
 
-// tr to korzeń
 /** @brief Iteruje przez każdy węzeł w drzewie
  * Iteruje przez każdy węzeł w drzewie. W węźle wywołuje funkcje.
  * Przypisuje wartości do @p phoneTrie.
@@ -83,9 +86,9 @@ void findForwardedNumPrefInTrie(Trie tr, Trie* forwardedNumPrefs, size_t* freeIn
  * @param[in] phoneTrie    – wskaźnik na korzeń drzewa, do którego
  *                           mają być pzepisywane wartości.
  * @param[in] (*searchFunc)(Trie, Trie, Trie*, size_t*) – funkcja
- *                          określająca zadanie dla każdego węzła;
+ *                           określająca zadanie dla każdego węzła;
  * @param[in] trieArray    – tablica wskaźników na drzewa;
- * @param[in] tr           – wartość potrzebna wewnętrznej funkcji.
+ * @param[in] value        – wartość potrzebna wewnętrznej funkcji.
  */
 void searchTrie(Trie tr, Trie phoneTrie, void (*searchFunc)(Trie, Trie, Trie*, size_t*), Trie* trieArray, size_t* value);
 

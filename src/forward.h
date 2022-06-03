@@ -17,7 +17,7 @@
  * @param[in] i              – indeks numeru telefonu;
  * @param[in] numToFind      – wskaźnik na napis reprezentujący numer, dla którego
  *                             ma zostać znalezione najdłuższe przekierownaie;
- * @param[in, out] arr       – wskaźnik na węzeł drzewa opisujący najdłuższe
+ * @param[in, out] maxPref   – wskaźnik na węzeł drzewa opisujący najdłuższe
  *                             znalezione przekierowanie;
  * @param[in] isNumCorrect   – wskaźnik na bool opisujący poprawność znaków w numerze.
  * @return Wskaźnik na węzeł zawierający koniec numeru dla którego istnieje najdłuższe przekierowanie
@@ -38,9 +38,9 @@ Trie findMaxForward(Trie* arr, size_t i, char const *numToFind, Trie maxPref, bo
 Trie setForwardingEndAndSizes(Trie maxPref, size_t* numberSplitIndex);
 
 /** @brief Wyznacza przekierowany numer.
- * @param[in] tr             – wskaźnik na korzeń drzewa przechowywującego numery i przekierowania;
- * @param[in] initialNum     – wskaźnik na napis reprezentujący wejściowy numer;
- * @param[in] initialNumSize – długość wejściowego numeru.
+ * @param[in] tr               – wskaźnik na korzeń drzewa przechowywującego numery i przekierowania;
+ * @param[in] initialNum       – wskaźnik na napis reprezentujący wejściowy numer;
+ * @param[in] numberSplitIndex – indeks podziału wejściowego numeru.
  * @return wskaźnik na napis reprezentujący przekierowany numer lub NULL, gdy nie
  *         udało się alokować pamięci lub @p initialNum nie reprezentuje numeru.
  */

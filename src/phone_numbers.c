@@ -38,3 +38,28 @@ char* getNumber(PhoneNumbers const *pnum, Trie tr, size_t index) {
 
     return number;
 }
+
+PhoneNumbers* createPhoneNumbersGet(Trie trPF, Trie trieOfNumbers, char* numCopy) {
+    Trie* arrayOfNumbersEnd = calloc(1, sizeof(Trie));
+
+    size_t numberSplitIndex;
+    char* forwardPref = getForwardedNumber(trPF, numCopy, &numberSplitIndex);
+    if (forwardPref == NULL) { return NULL; }
+
+    Trie numberPtr;
+
+    if (strlen(forwardPref) == 0) { numberPtr = trieOfNumbers; }
+    else { numberPtr = addNumber(trieOfNumbers, forwardPref); }
+
+    free(forwardPref);
+
+    if (numberPtr == NULL) { return NULL; }
+
+    arrayOfNumbersEnd[0] = numberPtr;
+    numberPtr->forwardCounter = numberSplitIndex;
+
+    PhoneNumbers* pn = phnumNew(1, trieOfNumbers, arrayOfNumbersEnd, numCopy);
+    if (pn->arrayOfNumbers == NULL) { return NULL; }
+
+    return pn;
+}

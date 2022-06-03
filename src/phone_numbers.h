@@ -9,6 +9,8 @@
 #ifndef PHONE_NUMBERS_PHONE_NUMBERS_H
 #define PHONE_NUMBERS_PHONE_NUMBERS_H
 
+#include "forward.h"
+#include "adding_functions.h"
 #include "trie.h"
 #include "functions.h"
 
@@ -37,7 +39,7 @@ PhoneNumbers* phnumNew(size_t numberOfTries, Trie trieOfNumbers, Trie* arrayOfNu
 
 /** @brief Dodaje do tablicy wskaźnik na przekierowany numer.
  * @param[in,out] pnum  – wskaźnik na strukturę przechowującą numery telefonów;
- * @param[in] numbe     – wskaźnik na napis opisujący numer;
+ * @param[in] number    – wskaźnik na napis opisujący numer;
  * @param[in] index     - indeks określający numer w tablicy posortowanej
  * leksykograficznie.
  */
@@ -55,12 +57,21 @@ void setRestOfNumber(char* forwardedNumber, char const *initialNum, size_t initi
 
 /** @brief Przepisuje nieprzekierowaną część @p initialNum do @p forwardedNumber.
  * @param[in, out] pnum   – wskaźnik na strukturę przechowującą numery telefonów;
- * @param[in] tr          – wskaźnik na napis reprezentujący wejściowy numer;
+ * @param[in] tr          – wskaźnik na węzeł reprezentujący koniec numeru;
  * @param[in] index       - indeks określający numer w tablicy posortowanej
- * leksykograficznie.
+ *                          leksykograficznie.
  * @return Wskaźnik na numer telefonu znajdujący się po @p index lub NULL, gdy
- * nie udało się alokować pamięci.
+ *         nie udało się alokować pamięci.
  */
 char* getNumber(PhoneNumbers const *pnum, Trie tr, size_t index);
+
+/** @brief Przygotowuje strukturę PhoneNumbers dla funkcji phfwdGet.
+ * @param[in,out] trPF       - wartość określiająca ilość numerów w drzewie;
+ * @param[in] trieOfNumbers  – wskaźnik na drzewo przechowujące numery telefonów;
+ * @param[in] numCopy        - kopia wejściowego numeru.
+ * @return Wskaźnik na utworzoną strukturę lub NULL, gdy nie udało się
+ *         alokować pamięci.
+ */
+PhoneNumbers* createPhoneNumbersGet(Trie trPF, Trie trieOfNumbers, char* numCopy);
 
 #endif //PHONE_NUMBERS_PHONE_NUMBERS_H

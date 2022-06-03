@@ -18,11 +18,15 @@
 #include "reverse_functions.h"
 
 /**
- * Struktura przechowująca przekierowania numerów telefonów.
+ * definicja typu struktury przechowującej przekierowania numerów telefonów.
  */
 typedef struct PhoneForward PhoneForward;
+
+/**
+ * Struktura przechowująca przekierowania numerów telefonów.
+ */
 struct PhoneForward {
-    Trie trieOfForwards;
+    Trie trieOfForwards; ///< korzeń drzewa zawierający przekierowania numerów telefonów;
 };
 
 /** @brief Tworzy nową strukturę.
