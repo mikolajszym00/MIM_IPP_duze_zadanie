@@ -16,7 +16,7 @@ Trie preparePhoneTrie(char const* num, Trie* numberEnd) {
 Trie* findForwardedNumPrefInPF(Trie trieOfForwards, char const *num, size_t* freeIndex, size_t* forwardCounter) {
     Trie* forwardedNumPrefs = calloc(strlen(num), sizeof(Trie));
 
-    findForwardedNumPrefInTrie(forwardedNumPrefs, freeIndex, trieOfForwards, num, forwardCounter);
+    findForwardedNumPrefInTrie(trieOfForwards, forwardedNumPrefs, freeIndex, num, forwardCounter);
 
     return forwardedNumPrefs;
 }
@@ -28,7 +28,7 @@ void checkPrefs(Trie tr, Trie phoneTrie, Trie* forwardedNumPrefs, size_t* nForwa
         if (tr->forward == forwardedNumPrefs[i]) {
             char* newNum = calloc(tr->depth+1, sizeof(char));
 
-            getNumberFromTrie(tr, newNum);
+            getNumberFromTrie(tr, newNum, tr->depth);
 
             Trie numEnd = addNumber(phoneTrie, newNum);
             free(newNum);
@@ -50,7 +50,7 @@ bool checkBelow(Trie tr, Trie numberEnd) {
     char* restOfNum = calloc(numberEnd->depth - tr->forwardCounter + 1, sizeof(char));
     if (restOfNum == NULL) { return true; }
 
-    getNumberFromTrieWithStop(numberEnd, numberEnd->depth - tr->forwardCounter, restOfNum);
+    getNumberFromTrie(numberEnd, restOfNum, numberEnd->depth - tr->forwardCounter);
 
     int restOfNumValue;
     getInteger(&restOfNumValue, restOfNum[0]);

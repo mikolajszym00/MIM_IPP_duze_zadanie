@@ -6,7 +6,7 @@ PhoneNumbers* phnumNew(size_t numberOfTries, Trie trieOfNumbers, Trie* arrayOfNu
 
     pn->trieOfNumbers = trieOfNumbers;
     pn->arrayOfNumbersEnd = arrayOfNumbersEnd;
-    pn->arrayOfNumbers = calloc(numberOfTries, sizeof(char*)); // +-1
+    pn->arrayOfNumbers = calloc(numberOfTries, sizeof(char*));
     pn->initNumber = initNumber;
     pn->numberOfTries = numberOfTries;
     return pn;
@@ -28,26 +28,11 @@ char* getNumber(PhoneNumbers const *pnum, Trie tr, size_t index) {
     size_t forwardingLen = tr->depth;
     size_t forwardedLen = tr->forwardCounter;
 
-//    if (tr->forwardCounter == 100) { maxPrefSize = 0; }
-//    else { maxPrefSize = tr->forwardCounter; }
-
-
     char* number = calloc(forwardingLen + strlen(initNumber) - forwardedLen + 1, sizeof(char));
-    if (number == NULL) { return NULL; } // moze tak
+    if (number == NULL) { return NULL; }
 
-//    printf("len %zd\n", forwardingLen + strlen(initNumber) - forwardedLen);
-    getNumberFromTrie(tr, number); //, ) , forwardingLen - 1
-
-//    printf("strlen %zd\n", strlen(initNumber));
-//    printf("tr %zd\n", forwardedLen);
-//    printf("for %zd\n", forwardingLen);
-
+    getNumberFromTrie(tr, number, tr->depth);
     setRestOfNumber(number, initNumber, strlen(initNumber), forwardedLen, forwardingLen);
-
-//    printf("num %zd\n", strlen(number));
-//    for (size_t i=tr->forwardCounter; i<initNumberRestLen+tr->forwardCounter; i++) {
-//        number[i] = initNumber[i-tr->forwardCounter];
-//    }
 
     addNumbersPtrToArray(pnum, number, index);
 

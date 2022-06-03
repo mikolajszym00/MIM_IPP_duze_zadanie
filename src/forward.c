@@ -35,15 +35,6 @@ Trie setForwardingEndAndSizes(Trie maxPref, size_t* numberSplitIndex) {
     return forwardingEnd;
 }
 
-void setForwardingInNumber(Trie forwardElement, char* forwardedNumber, size_t forwardingSize) {
-    if (forwardElement == NULL) {return;}
-
-    for (size_t i=1; i <= forwardingSize; ++i){
-        forwardedNumber[forwardingSize - i] = forwardElement->upIndex;
-        forwardElement = forwardElement->up;
-    }
-}
-
 char* getForwardedNumber(Trie tr, char const *initialNum, size_t* numberSplitIndex) {
     Trie *arr = tr->arrayOfTries;
 
@@ -52,13 +43,13 @@ char* getForwardedNumber(Trie tr, char const *initialNum, size_t* numberSplitInd
 
     if (!isNumCorrect) { return NULL; }
 
-    Trie forwardedPart = setForwardingEndAndSizes(maxPref, numberSplitIndex); // nuberSplitIndexniepotrzebny
+    Trie forwardedPart = setForwardingEndAndSizes(maxPref, numberSplitIndex);
     if (forwardedPart == NULL) { return calloc(1, sizeof(char)); }
 
-    char *maxPrefChar = calloc(forwardedPart->depth + 1, sizeof(char)); //*numberSplitIndex
+    char *maxPrefChar = calloc(forwardedPart->depth + 1, sizeof(char));
     if (maxPrefChar == NULL) { return NULL; }
 
-    getNumberFromTrie(forwardedPart, maxPrefChar); //,, forwardedPart->depth - 1
+    getNumberFromTrie(forwardedPart, maxPrefChar, forwardedPart->depth);
 
     return maxPrefChar;
 }

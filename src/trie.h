@@ -22,12 +22,12 @@
  */
 typedef struct Node* Trie;
 struct Node {
-    Trie* arrayOfTries; ///< wskaźnik na tablice poddrzew
+    Trie* arrayOfTries;    ///< wskaźnik na tablice poddrzew
     size_t forwardCounter; ///< ilość numerów, które zostały przekierowane na dany numer
-    Trie forward; ///< wskaźnik na węzeł drzewa, na który został przekierowany numer
-    Trie up; ///< wskaźnik do węzła opisującego poprzedni element numeru
-    size_t depth; ///< głębokość węzła
-    char upIndex; ///< znak opisujący poprzedni element numeru
+    Trie forward;          ///< wskaźnik na węzeł drzewa, na który został przekierowany numer
+    Trie up;               ///< wskaźnik do węzła opisującego poprzedni element numeru
+    size_t depth;          ///< głębokość węzła
+    char upIndex;          ///< znak opisujący poprzedni element numeru
 };
 
 /** @brief Tworzy nową strukturę.
@@ -48,29 +48,45 @@ struct Node {
 Trie trieNew(Trie forward, Trie up, size_t depth, char upIndex);
 
 /** @brief Przypisuje numerowi wartosci z drzewa.
- * Przypisuje kolejne wartości @p i numerowi @p num na podstawie kolejnych
+ * Przypisuje kolejne wartości na numer @p num na podstawie kolejnych
  * wartości @p tr.
- * @param[in] tr         – wskaźnik na korzeń drzewa;
- * @param[in, out] num   – wskaźnik na napis reprezentujący numer
- *                         telefonu;
- * @param[in] i          – indeks numeru telefonu.
+ * @param[in] tr        – wskaźnik na ostatni element numeru w drzewie;
+ * @param[in, out] num  – wskaźnik na napis reprezentujący numer
+ *                        telefonu;
+ * @param[in] stop      – wartość określająca długość numeru.
  */
-//void getNumberFromTrie(Trie tr, char* number, size_t i); //zmiana!!!
-void getNumberFromTrie(Trie tr, char* number);
+void getNumberFromTrie(Trie tr, char* number, size_t stop);
 
 /** @brief Wyszukuje węzeł @p tr, w którym kończy sie @p num.
  * @param[in] tr     – wskaźnik na korzeń drzewa;
  * @param[in] num    – wskaźnik na napis reprezentujący kolejne poziomy
  *                     drzewa.
  * @return Wskaźnik na drzewo lub jeśli którejś z kolejnych wartości @p num
- * nie ma w węzłach @p tr lub @p num zawiera niedozwolony znak zwraca NULL.
+ *         nie ma w węzłach @p tr lub @p num zawiera niedozwolony znak zwraca NULL.
  */
 Trie goToNumberEndTrie(Trie tr, char const* num);
 
-void getNumberFromTrieWithStop(Trie tr, size_t stop, char* number); // do usunięcia
+/** @brief Wyszukuje prefiksy @p num, na które istneją przekierowania.
+ * @param[in,out] tr              – wskaźnik na korzeń drzewa przekierowań;
+ * @param[in] forwardedNumPrefs   – tablica prefiksów zawierających, na które istneją przekierowania;
+ * @param[in] freeIndex           – wartość wolnego indeksu w tablicy;
+ * @param[in] num                 - wskaźnik na napis reprezentujący wejściowy numer;
+ * @param[in] forwardCounter      - wskaźnik na wartość określającą łączną ilość przekierowań.
+ */
+void findForwardedNumPrefInTrie(Trie tr, Trie* forwardedNumPrefs, size_t* freeIndex, char const* num, size_t* forwardCounter);
 
-void findForwardedNumPrefInTrie(Trie* forwardedNumPrefs, size_t* freeIndex, Trie tr, char const* num, size_t* forwardCounter);
-
-void searchTrie(Trie tr, Trie phoneTrie, void (*searchFunc)(Trie, Trie, Trie*, size_t*), Trie* forwardedNumPrefs, size_t* nForwarded);
+// tr to korzeń
+/** @brief Iteruje przez każdy węzeł w drzewie
+ * Iteruje przez każdy węzeł w drzewie. W węźle wywołuje funkcje.
+ * Przypisuje wartości do @p phoneTrie.
+ * @param[in] tr           – wskaźnik na korzeń drzewa;
+ * @param[in] phoneTrie    – wskaźnik na korzeń drzewa, do którego
+ *                           mają być pzepisywane wartości.
+ * @param[in] (*searchFunc)(Trie, Trie, Trie*, size_t*) – funkcja
+ *                          określająca zadanie dla każdego węzła;
+ * @param[in] trieArray    – tablica wskaźników na drzewa;
+ * @param[in] tr           – wartość potrzebna wewnętrznej funkcji.
+ */
+void searchTrie(Trie tr, Trie phoneTrie, void (*searchFunc)(Trie, Trie, Trie*, size_t*), Trie* trieArray, size_t* value);
 
 #endif //PHONE_NUMBERS_TRIE_H

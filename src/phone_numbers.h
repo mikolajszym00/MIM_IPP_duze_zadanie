@@ -16,31 +16,32 @@
  * Struktura przechowująca ciąg numerów telefonów.
  */
 struct PhoneNumbers {
-    Trie trieOfNumbers; ///< korzeń drzewa zawierający przekierowane numery telefonów
-    Trie* arrayOfNumbersEnd; ///< tablica węzłów zawierających ostatnie elementy numerów
-    char** arrayOfNumbers; ///< tablica zawierająca wskaźniki na ciągi numerów telefonów
-    char* initNumber;
-    size_t numberOfTries; ///< nowe!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    char type;
+    Trie trieOfNumbers;      ///< korzeń drzewa zawierający przekierowane numery telefonów;
+    Trie* arrayOfNumbersEnd; ///< tablica węzłów zawierających ostatnie elementy numerów;
+    char** arrayOfNumbers;   ///< tablica zawierająca wskaźniki na ciągi numerów telefonów;
+    char* initNumber;        ///< wejściowy numer;
+    size_t numberOfTries;    ///< ilość numerów, które miały przekierowania na prefiks wejściowego numeru.
 };
 typedef struct PhoneNumbers PhoneNumbers;
 
 /** @brief Tworzy nową strukturę.
  * Tworzy nową pustą strukturę.
+ * @param[in] numberOfTries       - wartość określiająca ilość numerów w drzewie;
  * @param[in] trieOfNumbers       – wskaźnik na korzeń drzewa zawierający przekierowane numery telefonów;
- * @param[in] arrayOfNumbersEnd   – wskaźnik na tablię węzłów zawierających ostatnie elementy numerów.
+ * @param[in] arrayOfNumbersEnd   – wskaźnik na tablię węzłów zawierających ostatnie elementy numerów;
+ * @param[in] initNumber          - wejściowy numer;
  * @return Wskaźnik na utworzoną strukturę lub NULL, gdy nie udało się
  *         alokować pamięci.
  */
-PhoneNumbers* phnumNew(size_t numberOfTries, Trie trieOfNumbers, Trie* arrayOfNumbersEnd, char* initNumber); // !!! nowe parametry
+PhoneNumbers* phnumNew(size_t numberOfTries, Trie trieOfNumbers, Trie* arrayOfNumbersEnd, char* initNumber);
 
 /** @brief Dodaje do tablicy wskaźnik na przekierowany numer.
- * @param[in] pnum     – wskaźnik na strukturę przechowującą numery telefonów;
- * @param[in] number   – wskaźnik na napis opisujący numer.
- * @return Wskaźnik na utworzoną strukturę lub NULL, gdy nie udało się
- *         alokować pamięci.
+ * @param[in,out] pnum  – wskaźnik na strukturę przechowującą numery telefonów;
+ * @param[in] numbe     – wskaźnik na napis opisujący numer;
+ * @param[in] index     - indeks określający numer w tablicy posortowanej
+ * leksykograficznie.
  */
-void addNumbersPtrToArray(PhoneNumbers const *pnum, char* number, size_t index); // zmiana !!!!
+void addNumbersPtrToArray(PhoneNumbers const *pnum, char* number, size_t index);
 
 /** @brief Przepisuje nieprzekierowaną część @p initialNum do @p forwardedNumber.
  * @param[in, out] forwardedNumber – wskaźnik na napis reprezentujący przkierowany numer;
@@ -52,7 +53,14 @@ void addNumbersPtrToArray(PhoneNumbers const *pnum, char* number, size_t index);
  */
 void setRestOfNumber(char* forwardedNumber, char const *initialNum, size_t initialNumSize, size_t maxPrefSize, size_t forwardingSize);
 
-
+/** @brief Przepisuje nieprzekierowaną część @p initialNum do @p forwardedNumber.
+ * @param[in, out] pnum   – wskaźnik na strukturę przechowującą numery telefonów;
+ * @param[in] tr          – wskaźnik na napis reprezentujący wejściowy numer;
+ * @param[in] index       - indeks określający numer w tablicy posortowanej
+ * leksykograficznie.
+ * @return Wskaźnik na numer telefonu znajdujący się po @p index lub NULL, gdy
+ * nie udało się alokować pamięci.
+ */
 char* getNumber(PhoneNumbers const *pnum, Trie tr, size_t index);
 
 #endif //PHONE_NUMBERS_PHONE_NUMBERS_H

@@ -14,18 +14,7 @@ Trie trieNew(Trie forward, Trie up, size_t depth, char upIndex) {
     return tr;
 }
 
-void getNumberFromTrie(Trie tr, char* number) {
-    size_t initDepth = tr->depth;
-    for (size_t i=0; i<initDepth; ++i) {
-        number[initDepth - 1 - i] = tr->upIndex;
-
-        if (tr->depth > 0) {
-            tr = tr->up;
-        }
-    }
-}
-
-void getNumberFromTrieWithStop(Trie tr, size_t stop, char* number) { // można połączyć z powyżej
+void getNumberFromTrie(Trie tr, char* number, size_t stop) {
     for (size_t i=0; i<stop; ++i) {
         number[stop - 1 - i] = tr->upIndex;
 
@@ -38,16 +27,10 @@ void getNumberFromTrieWithStop(Trie tr, size_t stop, char* number) { // można p
 Trie goToNumberEndTrie(Trie tr, char const* num) {
     int index;
 
-//    printf("%s\n", num);
-
-
     Trie* arr = tr->arrayOfTries;
     for (size_t i = 0; i < strlen(num); ++i){
-//        printf("%zd\n", i);
         if (!getInteger(&index, num[i])) { return NULL; }
-        if (arr[index] == NULL) {
-//            printf("ssd\n");
-            return NULL; }
+        if (arr[index] == NULL) { return NULL; }
 
         tr = arr[index];
         arr = tr->arrayOfTries;
@@ -55,13 +38,13 @@ Trie goToNumberEndTrie(Trie tr, char const* num) {
     return tr;
 }
 
-void findForwardedNumPrefInTrie(Trie* forwardedNumPrefs, size_t* freeIndex, Trie tr, char const* num, size_t* forwardCounter) {
+void findForwardedNumPrefInTrie(Trie tr, Trie* forwardedNumPrefs, size_t* freeIndex, char const* num, size_t* forwardCounter) {
     int index;
 
     Trie* arr = tr->arrayOfTries;
 
     for (size_t i = 0; i < strlen(num); ++i){
-        if (!getInteger(&index, num[i])) { return; } // addNumber zapewnił wcześniej ze num zawiera tylko ok wartości
+        if (!getInteger(&index, num[i])) { return; }
         if (arr[index] == NULL) { return; }
 
         tr = arr[index];
@@ -77,13 +60,13 @@ void findForwardedNumPrefInTrie(Trie* forwardedNumPrefs, size_t* freeIndex, Trie
     }
 }
 
-void searchTrie(Trie tr, Trie phoneTrie, void (*searchFunc)(Trie, Trie, Trie*, size_t*), Trie* forwardedNumPrefs, size_t* nForwarded) { // tr to korzeń
-    searchFunc(tr, phoneTrie, forwardedNumPrefs, nForwarded);
+void searchTrie(Trie tr, Trie phoneTrie, void (*searchFunc)(Trie, Trie, Trie*, size_t*), Trie* trieArray, size_t* value) {
+    searchFunc(tr, phoneTrie, trieArray, value);
     Trie* arr = tr->arrayOfTries;
 
     for (int i=0; i<NUM; i++) {
         if (arr[i] != NULL) {
-            searchTrie(arr[i], phoneTrie, searchFunc, forwardedNumPrefs, nForwarded);
+            searchTrie(arr[i], phoneTrie, searchFunc, trieArray, value);
         }
     }
 

@@ -1,3 +1,11 @@
+/** @file
+ * Interfejs klasy zawierający metody związane z metodą phfwdReverse
+ *
+ * @author Mikołaj Szymański
+ * @copyright Uniwersytet Warszawski
+ * @date 2022
+ */
+
 #ifndef PHONE_NUMBERS_REVERSE_FUNCTIONS_H
 #define PHONE_NUMBERS_REVERSE_FUNCTIONS_H
 
@@ -11,7 +19,7 @@
  * @param[in] numberEnd   – wskaźnik na węzeł drzwa zawierający ostatni element
  *                          numeru.
  * @return Wskaźnik na korzeń drzewa zawierającego przekierowania numerów lub NULL
- * jeśli nie udało się zaalokować pamięci.
+ *         jeśli nie udało się zaalokować pamięci.
  */
 Trie preparePhoneTrie(char const* num, Trie* numberEnd);
 
@@ -23,7 +31,7 @@ Trie preparePhoneTrie(char const* num, Trie* numberEnd);
  * @param[in] freeIndex          – wartość najbliżego wolnego indeksu w tablicy;
  * @param[in] forwardCounter     - licznik przekierowanych numerów.
  * @return Wskaźnik na tablicę drzew, będących prefiksami @p num zawierającymi
- * przekierowanie lub NULL jeśli nie udało się zaalokować pamięci.
+ *         przekierowanie lub NULL jeśli nie udało się zaalokować pamięci.
  */
 Trie* findForwardedNumPrefInPF(Trie trieOfForwards, char const *num, size_t* freeIndex, size_t* forwardCounter);
 

@@ -52,6 +52,7 @@ void deleteTrie(Trie tr) {
         for (int i = 0; i < NUM; ++i) {
             deleteTrie(arr[i]);
         }
+
         free(arr);
         free(tr);
     }
@@ -59,9 +60,11 @@ void deleteTrie(Trie tr) {
 
 void deleteForwardTrie(Trie oldForwardingEnd) {
     if (oldForwardingEnd != NULL) {
-        --oldForwardingEnd->forwardCounter;
+        --(oldForwardingEnd->forwardCounter);
 
         Trie unusedTrie = findUnusedTrie(oldForwardingEnd);
         deleteTrie(unusedTrie);
+
+        unusedTrie = NULL;
     }
 }

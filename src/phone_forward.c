@@ -70,7 +70,6 @@ char const *phnumGet(PhoneNumbers const *pnum, size_t idx) {
 
     Trie tr = arr[idx];
     if (tr == NULL) { return NULL; }
-//    printf("nTreis %zd\n", pnum->numberOfTries);
 
     return getNumber(pnum, tr, idx);
 }
@@ -108,17 +107,12 @@ PhoneNumbers* phfwdReverse(PhoneForward const *pf, char const *num) {
     size_t nForwarded = 0;
     size_t forwardCounter = 1;
 
-    Trie* forwardedNumPrefs = findForwardedNumPrefInPF(pf->trieOfForwards, num, &nForwarded, &forwardCounter); // zwraca tablice tych co przekierowują
-    addForwardsFromPFToPhoneTrie(pf->trieOfForwards, phoneTrie, forwardedNumPrefs, &nForwarded); // przelatuje drzewo w pf, dodaje elementy do phone trie
-
+    Trie* forwardedNumPrefs = findForwardedNumPrefInPF(pf->trieOfForwards, num, &nForwarded, &forwardCounter);
+    addForwardsFromPFToPhoneTrie(pf->trieOfForwards, phoneTrie, forwardedNumPrefs, &nForwarded);
     free(forwardedNumPrefs);
 
-    Trie* arrayOfNumbersEnd = createArrNumbersLexSorted(phoneTrie, numberEnd, forwardCounter); // tworzy leksykograficzną talbicę końców
+    Trie* arrayOfNumbersEnd = createArrNumbersLexSorted(phoneTrie, numberEnd, forwardCounter);
 
-//    printf("%c\n", arrayOfNumbersEnd[0]->up->up->upIndex);
-//    printf("%c\n", arrayOfNumbersEnd[1]->up->up->upIndex);
-
-//    printf("%zd\n", forwardCounter);
     return phnumNew(forwardCounter, phoneTrie, arrayOfNumbersEnd, numCopy);
 }
 
