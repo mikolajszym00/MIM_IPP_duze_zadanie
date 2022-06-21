@@ -102,6 +102,19 @@ PhoneNumbers * phfwdGet(PhoneForward const *pf, char const *num);
  */
 PhoneNumbers * phfwdReverse(PhoneForward const *pf, char const *num);
 
+/** @brief Wyznacza przeciwobrazu funkcji @ref phfwdGet.
+ * Dla podanej za pomocą wskaźnika @p pf bazy przekierowań i podanego numeru telefonu
+ * @p num wyznacza posortowaną leksykograficznie listę wszystkich takich numerów
+ * telefonów i tylko takich numerów telefonów x, że phfwdGet(x) = num.
+ * Alokuje strukturę @p PhoneNumbers, która musi być zwolniona za pomocą
+ * funkcji @ref phnumDelete.
+ * @param[in] pf  – wskaźnik na strukturę przechowującą przekierowania numerów;
+ * @param[in] num – wskaźnik na napis reprezentujący numer.
+ * @return Wskaźnik na strukturę przechowującą ciąg numerów lub NULL, gdy nie
+ *         udało się alokować pamięci.
+ */
+PhoneNumbers * phfwdGetReverse(PhoneForward const *pf, char const *num);
+
 /** @brief Usuwa strukturę.
  * Usuwa strukturę wskazywaną przez @p pnum. Nic nie robi, jeśli wskaźnik ten ma
  * wartość NULL.

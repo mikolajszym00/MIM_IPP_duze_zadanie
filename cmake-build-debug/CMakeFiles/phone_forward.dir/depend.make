@@ -42,6 +42,9 @@ CMakeFiles/phone_forward.dir/src/phone_forward_example.c.obj: ../src/phone_numbe
 CMakeFiles/phone_forward.dir/src/phone_forward_example.c.obj: ../src/reverse_functions.h
 CMakeFiles/phone_forward.dir/src/phone_forward_example.c.obj: ../src/trie.h
 
+CMakeFiles/phone_forward.dir/src/phone_numbers.c.obj: ../src/adding_functions.h
+CMakeFiles/phone_forward.dir/src/phone_numbers.c.obj: ../src/deleting_trie.h
+CMakeFiles/phone_forward.dir/src/phone_numbers.c.obj: ../src/forward.h
 CMakeFiles/phone_forward.dir/src/phone_numbers.c.obj: ../src/functions.h
 CMakeFiles/phone_forward.dir/src/phone_numbers.c.obj: ../src/phone_numbers.c
 CMakeFiles/phone_forward.dir/src/phone_numbers.c.obj: ../src/phone_numbers.h

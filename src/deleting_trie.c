@@ -15,7 +15,7 @@ Trie findUnusedTrie(Trie tr) {
     Trie* arr;
 
     char value;
-    char prevValue = '1';
+    int prevValue = 1;
 
     while (true) {
         value = tr->upIndex;
@@ -23,26 +23,28 @@ Trie findUnusedTrie(Trie tr) {
 
         arr = tr->arrayOfTries;
 
-        if (arr[value - '0']->forward != NULL || arr[value - '0']->forwardCounter > 0) {
-            Trie tr2 = arr[value - '0'];
-            Trie* arr2 = tr2->arrayOfTries;
+        int num;
+        getInteger(&num, value);
 
-            Trie temp = arr2[prevValue - '0'];
-            arr2[prevValue - '0'] = NULL;
+        if (arr[num]->forward != NULL || arr[num]->forwardCounter > 0) {
+            Trie tr2 = arr[num];
+            Trie* arr2 = tr2->arrayOfTries;
+            Trie temp = arr2[prevValue];
+            arr2[prevValue] = NULL;
 
             return temp;
         }
 
         for (int i = 0; i < NUM; ++i) {
-            if (arr[i] != NULL && value - '0' != i) {
-                Trie temp =  arr[value - '0'];
-                arr[value - '0'] = NULL;
+            if (arr[i] != NULL && num != i) {
+                Trie temp =  arr[num];
+                arr[num] = NULL;
 
                 return temp;
             }
         }
 
-        prevValue = value;
+        prevValue = num;
     }
 }
 

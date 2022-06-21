@@ -86,6 +86,41 @@ PhoneNumbers* phfwdReverse(PhoneForward const *pf, char const *num) {
     return phnumNew(forwardCounter, phoneTrie, arrayOfNumbersEnd, numCopy);
 }
 
+PhoneNumbers * phfwdGetReverse(PhoneForward const *pf, char const *num) {
+    PhoneNumbers* pnumRev = phfwdReverse(pf, num);
+    if (pnumRev == NULL) { return NULL; }
+
+    Trie* trieArray = pnumRev->arrayOfNumbersEnd;
+    size_t next = 0;
+
+    Trie* newTrieArray = calloc(pnumRev->numberOfTries+1, sizeof(Trie));
+
+    for(size_t i=0; i<pnumRev->numberOfTries; i++) {
+        PhoneNumbers* t = phfwdGet(pf, phnumGet(pnumRev, i));
+
+
+        if (strcmp(phnumGet(t, 0), num) == 0) {
+            newTrieArray[next] = trieArray[i];
+            ++next;
+        }
+
+        phnumDelete(t);
+    }
+
+    for(size_t i=0; i<pnumRev->numberOfTries; i++) {
+        if ((pnumRev->arrayOfNumbers)[i] != NULL) {
+            free((pnumRev->arrayOfNumbers)[i]);
+            (pnumRev->arrayOfNumbers)[i] = NULL;
+        }
+    }
+
+    free(pnumRev->arrayOfNumbersEnd);
+
+    pnumRev->arrayOfNumbersEnd = newTrieArray;
+
+    return pnumRev;
+}
+
 void phfwdDelete(PhoneForward *pf){
     if (pf == NULL) { return; }
 
