@@ -3,16 +3,19 @@
 Trie findMaxForward(Trie* arr, size_t i, char const *numToFind, Trie maxPref, bool* isNumCorrect){
     Trie forward;
 
-    if (strlen(numToFind) <= i) { return maxPref; }
+    if (strlen(numToFind) <= i)
+        return maxPref;
 
     int index;
     *isNumCorrect = getInteger(&index, numToFind[i]);
-    if (!(*isNumCorrect)) { return NULL; }
+    if (!(*isNumCorrect))
+        return NULL;
 
     if (arr[index]){
         forward = arr[index] -> forward;
 
-        if (forward) { maxPref = arr[index]; }
+        if (forward)
+            maxPref = arr[index];
 
         arr = arr[index]->arrayOfTries;
         ++i;
@@ -41,13 +44,16 @@ char* getForwardedNumber(Trie tr, char const *initialNum, size_t* numberSplitInd
     bool isNumCorrect;
     Trie maxPref = findMaxForward(arr, 0, initialNum, NULL, &isNumCorrect);
 
-    if (!isNumCorrect) { return NULL; }
+    if (!isNumCorrect)
+        return NULL;
 
     Trie forwardedPart = setForwardingEndAndSizes(maxPref, numberSplitIndex);
-    if (forwardedPart == NULL) { return calloc(1, sizeof(char)); }
+    if (forwardedPart == NULL)
+        return calloc(1, sizeof(char));
 
     char *maxPrefChar = calloc(forwardedPart->depth + 1, sizeof(char));
-    if (maxPrefChar == NULL) { return NULL; }
+    if (maxPrefChar == NULL)
+        return NULL;
 
     getNumberFromTrie(forwardedPart, maxPrefChar, forwardedPart->depth);
 

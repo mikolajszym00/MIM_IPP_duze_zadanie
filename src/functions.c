@@ -20,15 +20,16 @@ bool getInteger(int* num, char character) {
 }
 
 bool checkNum(char const *num) {
-    for (size_t i=0; i < strlen(num); i++) {
-        if (!isdigit(num[i]) && num[i] != '*' && num[i] != '#') { return false; }
+    for (size_t i = 0; num[i] != 0; i++) {
+        if (!isdigit(num[i]) && num[i] != '*' && num[i] != '#')
+            return false;
     }
 
     return true;
 }
 
 void copyNumber(char* numCopy, char const *num) {
-    for (size_t i=0; i<strlen(num); i++) {
+    for (size_t i = 0; num[i] != 0; i++) {
         numCopy[i] = num[i];
     }
 }

@@ -1,13 +1,13 @@
 /** @file
  * Interfejs klasy przechowującej przekierowania numerów telefonicznych
  *
- * @author Marcin Peczarski <marpe@mimuw.edu.pl>
+ * @author Marcin Peczarski <marpe@mimuw.edu.pl>, Mikołaj Szymański
  * @copyright Uniwersytet Warszawski
  * @date 2022
  */
 
-#ifndef __PHONE_FORWARD_H__
-#define __PHONE_FORWARD_H__
+#ifndef PHONE_FORWARD_H
+#define PHONE_FORWARD_H
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -132,4 +132,4 @@ void phnumDelete(PhoneNumbers *pnum);
  */
 char const * phnumGet(PhoneNumbers const *pnum, size_t idx);
 
-#endif /* __PHONE_FORWARD_H__ */
+#endif //PHONE_FORWARD_H

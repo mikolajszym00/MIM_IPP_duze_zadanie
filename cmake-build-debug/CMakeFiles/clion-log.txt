@@ -1,5 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/CodeBlocks/MinGW/bin/mingw32-make.exe" "-DCMAKE_C_COMPILER=C:/Program Files/CodeBlocks/MinGW/bin/gcc.exe" "-DCMAKE_CXX_COMPILER=C:/Program Files/CodeBlocks/MinGW/bin/g++.exe" -G "CodeBlocks - MinGW Makefiles" C:\programs\IPP_duze_zadanie
--- Could NOT find Doxygen (missing: DOXYGEN_EXECUTABLE) 
--- Configuring done
--- Generating done
--- Build files have been written to: C:/programs/IPP_duze_zadanie/cmake-build-debug

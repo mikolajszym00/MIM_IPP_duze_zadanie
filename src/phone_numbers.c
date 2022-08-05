@@ -2,7 +2,8 @@
 
 PhoneNumbers* phnumNew(size_t numberOfTries, Trie trieOfNumbers, Trie* arrayOfNumbersEnd, char* initNumber) {
     PhoneNumbers* pn = malloc(sizeof(struct PhoneNumbers));
-    if (pn == NULL) { return NULL; }
+    if (pn == NULL)
+        return NULL;
 
     pn->trieOfNumbers = trieOfNumbers;
     pn->arrayOfNumbersEnd = arrayOfNumbersEnd;
@@ -18,7 +19,7 @@ void addNumbersPtrToArray(PhoneNumbers const *pnum, char* number, size_t index) 
 }
 
 void setRestOfNumber(char* forwardedNumber, char const *initialNum, size_t initialNumSize, size_t maxPrefSize, size_t forwardingSize) {
-    for (size_t i=0; i < initialNumSize - maxPrefSize; ++i){
+    for (size_t i = 0; i < initialNumSize - maxPrefSize; ++i){
         forwardedNumber[forwardingSize + i] = initialNum[maxPrefSize + i];
     }
 }
@@ -29,7 +30,8 @@ char* getNumber(PhoneNumbers const *pnum, Trie tr, size_t index) {
     size_t forwardedLen = tr->forwardCounter;
 
     char* number = calloc(forwardingLen + strlen(initNumber) - forwardedLen + 1, sizeof(char));
-    if (number == NULL) { return NULL; }
+    if (number == NULL)
+        return NULL;
 
     getNumberFromTrie(tr, number, tr->depth);
     setRestOfNumber(number, initNumber, strlen(initNumber), forwardedLen, forwardingLen);
@@ -44,22 +46,25 @@ PhoneNumbers* createPhoneNumbersGet(Trie trPF, Trie trieOfNumbers, char* numCopy
 
     size_t numberSplitIndex;
     char* forwardPref = getForwardedNumber(trPF, numCopy, &numberSplitIndex);
-    if (forwardPref == NULL) { return NULL; }
+    if (forwardPref == NULL)
+        return NULL;
 
     Trie numberPtr;
 
-    if (strlen(forwardPref) == 0) { numberPtr = trieOfNumbers; }
+    if (forwardPref[0] == 0) { numberPtr = trieOfNumbers; }
     else { numberPtr = addNumber(trieOfNumbers, forwardPref); }
 
     free(forwardPref);
 
-    if (numberPtr == NULL) { return NULL; }
+    if (numberPtr == NULL)
+        return NULL;
 
     arrayOfNumbersEnd[0] = numberPtr;
     numberPtr->forwardCounter = numberSplitIndex;
 
     PhoneNumbers* pn = phnumNew(1, trieOfNumbers, arrayOfNumbersEnd, numCopy);
-    if (pn->arrayOfNumbers == NULL) { return NULL; }
+    if (pn->arrayOfNumbers == NULL)
+        return NULL;
 
     return pn;
 }

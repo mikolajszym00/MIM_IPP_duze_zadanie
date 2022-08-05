@@ -2,7 +2,8 @@
 
 Trie trieNew(Trie forward, Trie up, size_t depth, char upIndex) {
     Trie tr = malloc(sizeof(struct Node));
-    if (tr == NULL) { return NULL; }
+    if (tr == NULL)
+        return NULL;
 
     tr->arrayOfTries = calloc(NUM, sizeof(Trie));
     tr->forwardCounter = 0;
@@ -15,7 +16,7 @@ Trie trieNew(Trie forward, Trie up, size_t depth, char upIndex) {
 }
 
 void getNumberFromTrie(Trie tr, char* number, size_t stop) {
-    for (size_t i=0; i<stop; ++i) {
+    for (size_t i = 0; i < stop; ++i) {
         number[stop - 1 - i] = tr->upIndex;
 
         if (tr->depth > 0) {
@@ -28,9 +29,11 @@ Trie goToNumberEndTrie(Trie tr, char const* num) {
     int index;
 
     Trie* arr = tr->arrayOfTries;
-    for (size_t i = 0; i < strlen(num); ++i){
-        if (!getInteger(&index, num[i])) { return NULL; }
-        if (arr[index] == NULL) { return NULL; }
+    for (size_t i = 0; num[i] != 0; ++i){
+        if (!getInteger(&index, num[i]))
+            return NULL;
+        if (arr[index] == NULL)
+            return NULL;
 
         tr = arr[index];
         arr = tr->arrayOfTries;
@@ -43,9 +46,12 @@ void findForwardedNumPrefInTrie(Trie tr, Trie* forwardedNumPrefs, size_t* freeIn
 
     Trie* arr = tr->arrayOfTries;
 
-    for (size_t i = 0; i < strlen(num); ++i){
-        if (!getInteger(&index, num[i])) { return; }
-        if (arr[index] == NULL) { return; }
+    for (size_t i = 0; num[i] != 0; ++i){
+        if (!getInteger(&index, num[i]))
+            return;
+
+        if (arr[index] == NULL)
+            return;
 
         tr = arr[index];
 
@@ -64,10 +70,9 @@ void searchTrie(Trie tr, Trie phoneTrie, void (*searchFunc)(Trie, Trie, Trie*, s
     searchFunc(tr, phoneTrie, trieArray, value);
     Trie* arr = tr->arrayOfTries;
 
-    for (int i=0; i<NUM; i++) {
-        if (arr[i] != NULL) {
+    for (int i = 0; i < NUM; i++) {
+        if (arr[i] != NULL)
             searchTrie(arr[i], phoneTrie, searchFunc, trieArray, value);
-        }
     }
 
 }

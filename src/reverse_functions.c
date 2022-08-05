@@ -2,11 +2,14 @@
 
 Trie preparePhoneTrie(char const* num, Trie* numberEnd) {
     Trie phoneTrie = trieNew(NULL, NULL, 0, 'r');
-    if (phoneTrie == NULL) { return NULL; }
+    if (phoneTrie == NULL)
+        return NULL;
 
     Trie numEnd = addNumber(phoneTrie, num);
 
-    if (numEnd == NULL) { return NULL; }
+    if (numEnd == NULL)
+        return NULL;
+
     numEnd->forwardCounter = strlen(num);
     *numberEnd = numEnd;
 
@@ -22,18 +25,20 @@ Trie* findForwardedNumPrefInPF(Trie trieOfForwards, char const *num, size_t* fre
 }
 
 void checkPrefs(Trie tr, Trie phoneTrie, Trie* forwardedNumPrefs, size_t* nForwarded) {
-    if (tr->forward == NULL) { return; }
+    if (tr->forward == NULL)
+        return;
 
-    for (size_t i=0; i<*nForwarded; i++) {
+    for (size_t i = 0; i < *nForwarded; i++) {
         if (tr->forward == forwardedNumPrefs[i]) {
-            char* newNum = calloc(tr->depth+1, sizeof(char));
+            char* newNum = calloc(tr->depth + 1, sizeof(char));
 
             getNumberFromTrie(tr, newNum, tr->depth);
 
             Trie numEnd = addNumber(phoneTrie, newNum);
             free(newNum);
 
-            if (numEnd == NULL) { return; }
+            if (numEnd == NULL)
+                return;
             numEnd->forwardCounter = tr->forward->depth;
         }
     }
@@ -45,17 +50,19 @@ void addForwardsFromPFToPhoneTrie(Trie trieOfForwards, Trie phoneTrie, Trie* for
 
 bool checkBelow(Trie tr, Trie numberEnd) {
     Trie* arr = tr->arrayOfTries;
-    if (arr == NULL || numberEnd->depth == tr->forwardCounter) { return true; }
+    if (arr == NULL || numberEnd->depth == tr->forwardCounter)
+        return true;
 
     char* restOfNum = calloc(numberEnd->depth - tr->forwardCounter + 1, sizeof(char));
-    if (restOfNum == NULL) { return true; }
+    if (restOfNum == NULL)
+        return true;
 
     getNumberFromTrie(numberEnd, restOfNum, numberEnd->depth - tr->forwardCounter);
 
     int restOfNumValue;
     getInteger(&restOfNumValue, restOfNum[0]);
 
-    for (int i=0; i<=restOfNumValue; i++) {
+    for (int i = 0; i <= restOfNumValue; i++) {
         if (arr[i] != NULL) {
             Trie newEnd = addNumber(tr, restOfNum);
             newEnd->forwardCounter = numberEnd->depth;

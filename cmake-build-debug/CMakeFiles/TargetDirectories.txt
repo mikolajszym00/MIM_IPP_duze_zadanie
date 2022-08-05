@@ -1,3 +1,0 @@
-C:/programs/IPP_duze_zadanie/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-C:/programs/IPP_duze_zadanie/cmake-build-debug/CMakeFiles/phone_forward.dir
-C:/programs/IPP_duze_zadanie/cmake-build-debug/CMakeFiles/edit_cache.dir
