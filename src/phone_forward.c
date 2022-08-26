@@ -143,7 +143,7 @@ PhoneNumbers * phfwdGetReverse(PhoneForward const *pf, char const *num) {
     return pnumRev;
 }
 
-void phfwdDelete(PhoneForward *pf){
+void phfwdDelete(PhoneForward *pf) {
     if (pf == NULL)
         return;
 
@@ -151,7 +151,7 @@ void phfwdDelete(PhoneForward *pf){
     free(pf);
 }
 
-void phnumDelete(PhoneNumbers *pnum){
+void phnumDelete(PhoneNumbers *pnum) {
     if (pnum == NULL)
         return;
 

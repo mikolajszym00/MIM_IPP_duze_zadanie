@@ -9,7 +9,6 @@
 #ifndef PHONE_NUMBERS_ADDING_FUNCTIONS_H
 #define PHONE_NUMBERS_ADDING_FUNCTIONS_H
 
-#include "trie.h"
 #include "deleting_trie.h"
 
 /** @brief Dodaje numer do drzewa.

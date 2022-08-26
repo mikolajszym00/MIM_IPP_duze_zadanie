@@ -1,6 +1,6 @@
 #include "forward.h"
 
-Trie findMaxForward(Trie* arr, size_t i, char const *numToFind, Trie maxPref, bool* isNumCorrect){
+Trie findMaxForward(Trie* arr, size_t i, char const *numToFind, Trie maxPref, bool* isNumCorrect) {
     Trie forward;
 
     if (strlen(numToFind) <= i)
@@ -11,7 +11,7 @@ Trie findMaxForward(Trie* arr, size_t i, char const *numToFind, Trie maxPref, bo
     if (!(*isNumCorrect))
         return NULL;
 
-    if (arr[index]){
+    if (arr[index]) {
         forward = arr[index] -> forward;
 
         if (forward)
@@ -60,7 +60,7 @@ char* getForwardedNumber(Trie tr, char const *initialNum, size_t* numberSplitInd
     return maxPrefChar;
 }
 
-void removeForwards(Trie tr){
+void removeForwards(Trie tr) {
     if (tr != NULL) {
         if (tr->forward) {
             deleteForwardTrie(tr->forward);

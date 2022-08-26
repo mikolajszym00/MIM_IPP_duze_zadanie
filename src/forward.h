@@ -9,7 +9,6 @@
 #ifndef PHONE_NUMBERS_FORWARD_H
 #define PHONE_NUMBERS_FORWARD_H
 
-#include "trie.h"
 #include "deleting_trie.h"
 
 /** @brief Znajduje najdłuższe przekierowanie dla numeru.

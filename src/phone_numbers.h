@@ -11,8 +11,6 @@
 
 #include "forward.h"
 #include "adding_functions.h"
-#include "trie.h"
-#include "functions.h"
 
 /**
  * Struktura przechowująca ciąg numerów telefonów.
@@ -24,6 +22,10 @@ struct PhoneNumbers {
     char* initNumber;        ///< wejściowy numer;
     size_t numberOfTries;    ///< ilość numerów, które miały przekierowania na prefiks wejściowego numeru.
 };
+
+/**
+ * Deficicja typu określającego ciągi numerów telefonów.
+ */
 typedef struct PhoneNumbers PhoneNumbers;
 
 /** @brief Tworzy nową strukturę.

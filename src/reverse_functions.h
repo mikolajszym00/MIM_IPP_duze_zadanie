@@ -9,8 +9,6 @@
 #ifndef PHONE_NUMBERS_REVERSE_FUNCTIONS_H
 #define PHONE_NUMBERS_REVERSE_FUNCTIONS_H
 
-#include "trie.h"
-#include "functions.h"
 #include "adding_functions.h"
 
 /** @brief Przygotowuje nowe drzewo.

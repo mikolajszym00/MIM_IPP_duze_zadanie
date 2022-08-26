@@ -46,7 +46,7 @@ void findForwardedNumPrefInTrie(Trie tr, Trie* forwardedNumPrefs, size_t* freeIn
 
     Trie* arr = tr->arrayOfTries;
 
-    for (size_t i = 0; num[i] != 0; ++i){
+    for (size_t i = 0; num[i] != 0; ++i) {
         if (!getInteger(&index, num[i]))
             return;
 
@@ -74,5 +74,4 @@ void searchTrie(Trie tr, Trie phoneTrie, void (*searchFunc)(Trie, Trie, Trie*, s
         if (arr[i] != NULL)
             searchTrie(arr[i], phoneTrie, searchFunc, trieArray, value);
     }
-
 }

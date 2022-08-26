@@ -9,12 +9,7 @@
 #ifndef PHONE_FORWARD_H
 #define PHONE_FORWARD_H
 
-#include <stdbool.h>
-#include <stddef.h>
-
 #include "phone_numbers.h"
-#include "adding_functions.h"
-#include "forward.h"
 #include "reverse_functions.h"
 
 /**

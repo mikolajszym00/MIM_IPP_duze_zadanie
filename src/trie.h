@@ -85,7 +85,7 @@ void findForwardedNumPrefInTrie(Trie tr, Trie* forwardedNumPrefs, size_t* freeIn
  * @param[in] tr           – wskaźnik na korzeń drzewa;
  * @param[in] phoneTrie    – wskaźnik na korzeń drzewa, do którego
  *                           mają być pzepisywane wartości.
- * @param[in] (*searchFunc)(Trie, Trie, Trie*, size_t*) – funkcja
+ * @param[in] searchFunc   – funkcja
  *                           określająca zadanie dla każdego węzła;
  * @param[in] trieArray    – tablica wskaźników na drzewa;
  * @param[in] value        – wartość potrzebna wewnętrznej funkcji.

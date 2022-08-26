@@ -1,5 +1,4 @@
 #include "adding_functions.h"
-#include "stdint.h"
 
 Trie addNumber(Trie tr, char const *num1) {
     Trie* arr = tr->arrayOfTries;
